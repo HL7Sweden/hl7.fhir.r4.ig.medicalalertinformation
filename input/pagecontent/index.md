@@ -11,6 +11,14 @@ uppmärksamhetsinformation <https://www.socialstyrelsen.se/kunskapsstod-och-regl
 
 # Användningsbeskrivning
 
+Denna implementationsguide beskriver hur uppmärksamhetsinformation kan struktureras och utbytas med hjälp av HL7 FHIR-standardens resurser. Guiden är baserad på Socialstyrelsens informationsspecifikation för uppmärksamhetsinformation och syftar till att möjliggöra ett enhetligt och säkert informationsutbyte mellan vårdsystem, oberoende av leverantör.
+Uppmärksamhetsinformation innefattar uppgifter om patienters särskilda behov, risker eller andra förhållanden som är viktiga att beakta i vård- och omsorgssituationer. Informationen är avsedd att höja medvetenheten hos vårdpersonal och andra berörda aktörer, i syfte att bidra till en trygg, personcentrerad och säker vård.
+Implementationsguiden definierar specialiserade FHIR-profiler, värdemängder (ValueSets), koder och exempel som överensstämmer med Socialstyrelsens nationella riktlinjer och begreppsmodeller. Den är avsedd att stödja tekniska integrationer och interoperabilitet mellan informationssystem inom vård och omsorg.
+Målgruppen för guiden är informationsförvaltare, systemförvaltare, utvecklare och andra som arbetar med införande av FHIR-baserat informationsutbyte inom hälso- och sjukvård samt socialtjänst.
+
+
+Den här implementationsguiden beskriver utbyte av uppmärksamhetsinformation med FHIR
+
 Här kan vi beskriva hur profilen SEAlerInformationFlag ska användas i kombination med övriga profiler som refereras till. Det vi behöver beskriva är bl.a.
  - Tändning och släckning
  - Hantering av Ej strukturanpassad uppmärksamhetsinformation

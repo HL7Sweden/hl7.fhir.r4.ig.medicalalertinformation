@@ -46,7 +46,10 @@ dependencies:
 # with supported extensions (e.g., .md/.xml) will be treated as
 # sub-pages.
 #
-# pages:
+pages:
+  index.md:
+  flags.md:
+    title: Uppmärksamhetssignaler
 #   index.md:
 #     title: Example Home
 #   implementation.xml:
@@ -79,6 +82,7 @@ dependencies:
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
   Home: index.html
+  Alerts: flags.html
   Artifacts: artifacts.html
 
 # ╭───────────────────────────Less Common Implementation Guide Properties──────────────────────────╮

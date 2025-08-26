@@ -5,7 +5,7 @@ Profile: SEAlertInformationIncidenceOfInfectiousDiseaseObservation
 Parent: Observation
 Title: "SE AlertInformation Incidence Of Infectious Disease Profile"
 Description: "Swedish profile for the observation of incidence of infectious 
-                disease used as supportingInfo to the profile SEAlertInformationFlag."
+                disease used as flag-detail to the profile SEAlertInformationFlag."
 * code from SEAlertInformationInfectiousDiseaseVS (required)
 
 Instance: SEAlertInformationIncidenceOfInfectiousDiseaseObservationExample
@@ -17,7 +17,7 @@ Description: "An example of the Swedish profile for the observation of incidence
 * subject = Reference(Patient/example) "Förnamn Efternamn"
 
 ValueSet: SESCTInfectiousDiseaseAlertInformationVS
-Id: 60661000052106
+Id: 60661000052106xxxxxx
 Title: "Urval smittsamma sjukdomar, uppmärksamhetsinformation"
 Description: "Codes in Snomed CT representing infectious diseases used for alert information."
 // url, status, purpose, and other metadata could be defined here using caret syntax (omitted)
