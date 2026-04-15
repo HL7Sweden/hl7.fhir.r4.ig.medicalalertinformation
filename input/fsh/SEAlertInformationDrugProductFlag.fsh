@@ -16,6 +16,7 @@ Description: "Swedish profile of the Flag resource used for alert information ab
 
 Instance: SEAlertInformationDrugProductFlagExample
 InstanceOf: SEAlertInformationFlag
+// Description: "Exempel på svensk profil för läkemedelsuppmärksamhetssignal."
 Description: "An example of the Swedish profile of the drug product Flag resource."
 * status = #active
 * code = $SCT#64301000052105 "blodsmitta hos gravid"
@@ -24,7 +25,8 @@ Description: "An example of the Swedish profile of the drug product Flag resourc
 
 ValueSet: SEAlertInformationDrugProductATCVS
 Id: 1.2.752.116.3.1.16.1.3.1
-Title: "Läkemedel ATC"
+Title: "Drug Product ATC"
+//Title: "Läkemedel ATC"
 * include $ATC#A01AA "Andra hjärtatonsilliner"
 * include $ATC#B01AA "Vitamin K-antagonister"
 * include $ATC#C09BA "Antibiotika kombinationer"
@@ -32,18 +34,21 @@ Title: "Läkemedel ATC"
 
 ValueSet: SEAlertInformationDrugProductICDVS
 Id: 1.2.752.116.3.1.16.1.3.2
-Title: "Läkemedel ICD-10-SE"
+Title: "Drug Product ICD-10-SE"
+//Title: "Läkemedel ICD-10-SE"
 * include $ICD#Z79.89 "Långtidsanvändning av andra specificerade läkemedel"
 
 ValueSet: SEAlertInformationDrugProductSnomedVS
 Id: 59841000052103
-Title: "Urval läkemedel, uppmärksamhetsinformation"
+//Title: "Urval läkemedel, uppmärksamhetsinformation"
+Title: "Subset of drug products (attention information)"
 * include $SCT#76300000052101 "opioidbehandling"
 * include $SCT#41980000052107 "antikoagulantia"
 
 ValueSet: SEAlertInformationDrugProductVS
 Id: 1.2.752.116.3.1.16.1.3
-Title: "Uppmärksamhetsinformation Läkemedel"
+// Title: "Uppmärksamhetsinformation Läkemedel"
+Title: "Alert Information Drug Product"
 * include codes from valueset SEAlertInformationDrugProductATCVS
 * include codes from valueset SEAlertInformationDrugProductICDVS
 * include codes from valueset SEAlertInformationDrugProductSnomedVS

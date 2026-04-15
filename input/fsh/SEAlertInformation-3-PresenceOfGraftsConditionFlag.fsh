@@ -7,7 +7,9 @@ Alias: $ICD = http://hl7.org/fhir/sid/icd-10
 Profile: SEAlertInformation-3-PresenceOfGraftsConditionFlag
 Parent: SEAlertInformationFlag
 Title: "SE AlertInformation 3 Presence Of Grafts Condition Flag Profile"
-Description: "Swedish profile of the Flag resource used for alert information about resence of grafts conditions."
+Description: "Indicates the presence of grafts in the patient, such as transplanted organs or tissues. Attention information regarding grafts is considered current if there is a documented occurrence of the graft in the patient, and no later record indicating that the graft is no longer present.
+
+[Mapping to UMI](StructureDefinition-SEAlertInformation-3-PresenceOfGraftsConditionFlag-mappings.html)"
 * code from SEAlertInformationPresenceOfGraftsConditionVS (required)
 * subject only Reference(SEAlertInformationPatient)
 * category = #3 "PresenceOfGraftsCondition"
@@ -24,20 +26,44 @@ Description: "Swedish profile of the Flag resource used for alert information ab
 
 ValueSet: SEAlertInformationPresenceOfGraftsConditionVS
 Id: a1.2.752.116.3.1.16.1.3
-Title: "Uppmärksamhetsinformation Förekomst av implantat"
-Description: "Uppmärksamhetsinformation Förekomst av implantat."
+Title: "Attention information – Presence of implants"
+// Title: "Uppmärksamhetsinformation Förekomst av implantat"
+Description: "Attention information – Presence of implants"
+// Description: "Uppmärksamhetsinformation Förekomst av implantat."
 * include codes from valueset SEAlertInformationMedicalConditionSnomedVS
 * include codes from valueset SEAlertInformationPresenceOfGraftsConditionSnomedVS
 
 ValueSet: SEAlertInformationPresenceOfGraftsConditionSnomedICDVS
 Id: b1.2.752.116.3.1.16.1.3.1
-Title: "Förekomst av implantat ICD-10-SE"
+Title: "Presence of implants ICD-10-SE"
+// Title: "Förekomst av implantat ICD-10-SE"
 * include $ICD#Z95.0 "Förekomst av elektronisk kardiell anordning"
 
 ValueSet: SEAlertInformationPresenceOfGraftsConditionSnomedVS
 Id: 59841000052105
-Title: "urval implantat, uppmärksamhetsinformation"
+Title: "Selection of implants, attention information"
+// Title: "urval implantat, uppmärksamhetsinformation"
 * include $SCT#Z95.0 "Förekomst av elektronisk kardiell anordning"
+
+Mapping:  SEAlertInformation-3-PresenceOfGraftsConditionFlagToUMI
+Source:   SEAlertInformation-3-PresenceOfGraftsConditionFlag
+Target:   "UMI"
+Id:       UMI
+Title:    "UMI"
+Description: "Description..."
+// * code -> "Implantation(Aktivitet).kod Förekomst av implantat(Observation).värde" 
+* code -> "Uppmärksamhetsinformation Förekomst av implantat (1.2.752.116.3.1.16.1.3)"
+// TODO: Lägg till mappning till aktiviteterna för att sätta status
+* status -> "Implantation(Aktivitet) Avlägsnande av implantat(Aktivitet) Förekomst av implantat(Observation)" "Flag.status ska sättas enligt följande: observerad förekomst & negation = falskt→ active observerad förekomst & negation = sant → inactive. entered-in-error används inte."
+* period.start -> "Implantation(Aktivitet).tid Förekomst av implantat(Observation).tid" 
+* period.end -> "Avlägsnande av implantat(Aktivitet).tid.sluttid Förekomst av implantat(Observation).tid" 
+* subject -> "Patient"
+* category -> "Typ av uppmärksamhetsinformation (huvudgrupp)"
+
+// * note -> "Förekomst av implantat(Observation).anmärkning Flag.note" "Fritextanteckningar/meddelanden"
+// * meta.lastUpdated -> "Implantation(Aktivitet).meta.lastUpdated Förekomst av implantat(Observation).meta.lastUpdated" "Tidpunkt för senaste uppdatering"
+// * author -> "Implantation(Aktivitet).utförare Förekomst av implantat(Observation).utfördAv" "Mappar vem som dokumenterat/utfört"
+// * qualifier -> "Förekomst av implantat(Observation).kvalificering Flag.extension[kvalifiering]" "Eventuella kvalifikationer/attribut"
 
 // ValueSet: SEAlertInformationMedicalConditionSnomedVS
 // Id: 59821000052101

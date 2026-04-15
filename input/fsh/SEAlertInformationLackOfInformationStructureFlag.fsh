@@ -7,7 +7,9 @@ Alias: $ATC = https://nzhts.digital.health.nz/fhir/ValueSet/atc-code
 
 Profile: SEAlertInformationLackOfInformationStructureFlag
 Parent: SEAlertInformationFlag
+// Title: "SE AlertInformation saknar informationsstruktur Profil"
 Title: "SE AlertInformation lack of information structureF flag Profile"
+// Description: "Svensk profil av Flag resource som används för uppmärksamhetssignaler som saknar nödvändig informationsstruktur."
 Description: "Swedish profile of the Flag resource used for alerts missing the needed information structure."
 * subject only Reference(SEAlertInformationPatient)
 * category = #A
@@ -15,6 +17,7 @@ Description: "Swedish profile of the Flag resource used for alerts missing the n
 
 Instance: SEAlertInformationLackOfInformationStructureFlagExample
 InstanceOf: SEAlertInformationFlag
+// Description: "Exempel på svensk profil för Flag resource för saknad informationsstruktur."
 Description: "An example of the Swedish profile of the drug product Flag resource."
 * status = #active
 * code = $SCT#64301000052105 "blodsmitta hos gravid"

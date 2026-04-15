@@ -4,24 +4,31 @@ Alias: $ICD = http://hl7.org/fhir/sid/icd-10
 Profile: SEAlertInformation-4-PresenceOfImplantFlag
 Parent: SEAlertInformationFlag
 Title: "SE AlertInformation 4 Presence Of Implant Flag Profile"
-Description: "Swedish profile of the Flag resource used for alert information about presence of implant."
+Description: "Indicates the presence of implants in the patient, such as medical devices or prostheses that have been implanted. Attention information regarding implants is considered current if there is a documented occurrence of the implant in the patient, and no later record indicating that the implant is no longer present.
+
+[](StructureDefinition-SEAlertInformation-4-PresenceOfImplantFlag-mappings.html)"
 * code from SEAlertInformationPresenceOfImplantVS (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #4 "Presence of Implant"
+// * status from flag-status where code in { "active", "inactive" }
+* category = #A "Medicinska tillstånd och behandlingar"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
 
 ValueSet: SEAlertInformationPresenceOfImplantVS
 Id: a1.2.752.116.3.1.16.1.3.1
-Title: "Uppmärksamhetsinformation Förekomst av implantat"
-Description: "Uppmärksamhetsinformation Förekomst av implantat."
+// Title: "Uppmärksamhetsinformation Förekomst av implantat"
+Title: "Alert Information Presence of Implant"
+// Description: "Uppmärksamhetsinformation Förekomst av implantat."
+Description: "Alert information about presence of implant."
 * include codes from valueset SEAlertInformationPresenceOfImplantICD10SEVS
 * include codes from valueset SEAlertInformationPresenceOfImplantSnomedCTVS
 
 ValueSet: SEAlertInformationPresenceOfImplantICD10SEVS
 Id: SEImplantatICD10SEVS
-Title: "Förekomst av implantat ICD-10-SE"
-Description: "Valuesets för förekomsten av implantat enligt ICD-10-SE."
+// Title: "Förekomst av implantat ICD-10-SE"
+Title: "Presence of Implant ICD-10-SE"
+// Description: "Valuesets för förekomsten av implantat enligt ICD-10-SE."
+Description: "Value set for presence of implant according to ICD-10-SE."
 * include $ICD#Z95.0 "Förekomst av elektronisk kardiell anordning"
 * include $ICD#Z95.2 "Förekomst av hjärtklaffprotes av icke-biologiskt material"
 * include $ICD#Z95.4 "Förekomst av annan typ av hjärtklaffsersättning"
@@ -33,8 +40,10 @@ Description: "Valuesets för förekomsten av implantat enligt ICD-10-SE."
 
 ValueSet: SEAlertInformationPresenceOfImplantSnomedCTVS
 Id: SEImplantatSnomedCTVS
-Title: "Uppmärksamhetsinformation Implantat Snomed CT"
-Description: "Valuesets för uppmärksamhetsinformation om implantat enligt Snomed CT."
+// Title: "Uppmärksamhetsinformation Implantat Snomed CT"
+Title: "Alert Information Implant Snomed CT"
+// Description: "Valuesets för uppmärksamhetsinformation om implantat enligt Snomed CT."
+Description: "Value set for alert information about implant according to Snomed CT."
 * include $SCT#72506001 "implanterbar defibrillator"
 * include $SCT#14106009 "pacemaker"
 * include $SCT#705991002 "mekanisk hjärtklaffprotes"
@@ -51,3 +60,25 @@ Description: "Valuesets för uppmärksamhetsinformation om implantat enligt Snom
 * include $SCT#705545001 "Diaphragm/phrenic nerve electrical stimulation system"
 * include $SCT#360066001 "vänsterkammarassist"
 * include $SCT#360125003 "pacemakerelektrod"
+
+// Mapping:  SEAlertInformation-4-PresenceOfImplantFlagToRIVTA
+// Source:   SEAlertInformation-4-PresenceOfImplantFlag
+// Target:   "RIVTA-GetAlertInformation"
+// Id:       RIVTA-GetAlertInformation
+// Title:    "RIVTA-GetAlertInformation"
+// Description: "Description..."
+// * code -> "GetAlertInformationResponse.alertInformation.body.activity.code GetAlertInformationResponse.alertInformation.body.condition.value" 
+
+Mapping:  SEAlertInformation-4-PresenceOfImplantFlagToUMI
+Source:   SEAlertInformation-4-PresenceOfImplantFlag
+Target:   "UMI"
+Id:       UMI
+Title:    "UMI"
+Description: "Description..."
+// * code -> "Implantation(Aktivitet).kod Förekomst av implantat(Observation).värde" 
+* code -> "Uppmärksamhetsinformation Förekomst av transplantat (1.2.752.116.3.1.16.1.4)"
+// TODO: Lägg till mappning till aktiviteterna för att sätta status
+* status -> "Transplantation(Aktivitet) Avlägsnande av transplantat(Aktivitet) Förekomst av transplantat(Observation)" "Flag.status ska sättas enligt följande: observerad förekomst & negation = falskt→ active observerad förekomst & negation = sant → inactive. entered-in-error används inte."
+* period.start -> "Transplantation(Aktivitet).tid Förekomst av transplantat(Observation).tid" 
+* subject -> "Patient"
+* category -> "Typ av uppmärksamhetsinformation (huvudgrupp)"

@@ -17,6 +17,7 @@ Description: "SE AlertInformation Patient Profile based on Swedish profile of th
 */
 Instance: SEAlertInformationPatientExample
 InstanceOf: SEAlertInformationPatient
+// Description: "Patientexempel"
 Description: "Patient example"
 * meta.security[0] = #DEMO
 * meta.security[1] = SecurityLabelCS#sekretessmarkering

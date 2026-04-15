@@ -8,7 +8,10 @@ Profile: SEAlertInformation-1-OtherMedicalConditionFlag
 Parent: SEAlertInformationFlag
 Title: "SE AlertInformation 1 Other Medical Condition Flag Profile"
 // Description: "Swedish profile of the Flag resource used for alert information about other medical conditions."
-//* text.div = "markdown:SEAlertInformation-1-OtherMedicalConditionFlag-intro.md"
+Description: "A medical condition that is not an allergy, presence of infectious disease, presence of infectious agent, presence of implant, or presence of graft that the patient has or does not have. This is documented using the **Observation** class in the reference model. Attention information regarding another medical condition is considered current if there is a documented occurrence of the condition in the patient, and no later record indicating that the patient no longer has this condition. The medical conditions that need to be highlighted are listed in the value set [Attention information – Other medical condition](ValueSet-1.2.752.116.3.1.16.1.1.html).
+
+[Mapping to UMI](StructureDefinition-SEAlertInformation-1-OtherMedicalConditionFlag-mappings.html)"
+// * text.div = "markdown:SEAlertInformation-1-OtherMedicalConditionFlag-intro.md"
 * code from SEAlertInformationOtherMedicalConditionVS (required)
 * subject only Reference(SEAlertInformationPatient)
 * category = #1 "OtherMedicalCondition"
@@ -25,7 +28,8 @@ Description: "An example of the Swedish profile of the Flag resource."
 
 ValueSet: SEAlertInformationMedicalConditionSnomedVS
 Id: 59821000052101
-Title: "Urval medicinska tillstånd, uppmärksamhetsinformation"
+Title: "Subset of medical conditions (attention information)"
+// Title: "Urval medicinska tillstånd, uppmärksamhetsinformation"
 * include $SCT#41291007 "angioödem"
 * include $SCT#9651007 "långt QT-syndrom"
 * include $SCT#70995007 "pulmonell hypertoni"
@@ -75,7 +79,8 @@ Title: "Urval medicinska tillstånd, uppmärksamhetsinformation"
 
 ValueSet: SEAlertInformationOtherMedicalConditionICDVS
 Id: 1.2.752.116.3.1.16.1.1.1
-Title: "Annat medicinskt tillstånd ICD-10-SE"
+Title: "Other medical condition ICD-10-SE"
+//Title: "Annat medicinskt tillstånd ICD-10-SE"
 * include $ICD#T78.3 "Angioneurotiskt ödem"
 * include $ICD#I49.8E "Långt QT-syndrom"
 * include $ICD#I27.0 "Primär pulmonell hypertoni"
@@ -143,7 +148,8 @@ Title: "Annat medicinskt tillstånd ICD-10-SE"
 
 ValueSet: SEAlertInformationOtherMedicalConditionVS
 Id: 1.2.752.116.3.1.16.1.1
-Title: "Uppmärksamhetsinformation Annat medicinskt tillstånd"
+Title: "Attention information – Other medical condition"
+//Title: "Uppmärksamhetsinformation Annat medicinskt tillstånd"
 Description: "Uppmärksamhetsinformation för annat medicinskt tillstånd."
 * include codes from valueset SEAlertInformationOtherMedicalConditionICDVS
 * include codes from valueset SEAlertInformationMedicalConditionSnomedVS
@@ -154,3 +160,18 @@ Description: "Uppmärksamhetsinformation för annat medicinskt tillstånd."
 // Denna profil används för att dokumentera och uppmärksamma andra medicinska tillstånd hos en patient som kan vara av betydelse för vård och behandling, men som inte omfattas av övriga specifika uppmärksamhetssignaler såsom överkänslighet, smittsam sjukdom, smittämne, implantat eller transplantat. Exempel på sådana tillstånd kan vara ärftliga koagulationsrubbningar, ämnesomsättningssjukdomar, immunbristtillstånd eller andra sällsynta diagnoser. Syftet är att säkerställa att viktig medicinsk information om patienten är lättillgänglig och kan beaktas i alla vårdsituationer.
 //
 //!include SEAlertInformation-1-OtherMedicalConditionFlag-intro.md
+
+
+Mapping:  SEAlertInformation-1-OtherMedicalConditionFlagToUMI
+Source:   SEAlertInformation-1-OtherMedicalConditionFlag
+Target:   "UMI"
+Id:       UMI
+Title:    "UMI"
+Description: "Description..."
+// * code -> "Implantation(Aktivitet).kod Förekomst av implantat(Observation).värde" 
+* code -> "Uppmärksamhetsinformation Annat medicinskt tillstånd (1.2.752.116.3.1.16.1.1)"
+// TODO: Lägg till mappning till aktiviteterna för att sätta status
+* status -> "Annat medicinskt tillstånd(Observation).negation. Om negation = true → inactive, om negation = false → active."
+* period.start -> "Behandling(Aktivitet).tid.starttid" 
+* subject -> "Patient"
+* category -> "Typ av uppmärksamhetsinformation (huvudgrupp)"
