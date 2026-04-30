@@ -16,10 +16,6 @@ This implementation guide describes how medical alert information can be structu
 
 The implementation guide defines specialized FHIR profiles, value sets, code systems, and examples that comply with the National Board of Health and Welfare’s national guidelines and conceptual models. It is intended to support technical integrations and interoperability between information systems in healthcare and social care. The target audience for the guide includes information managers, system administrators, developers, and others working with the implementation of FHIR-based information exchange in health and social care.
 
-⸻
-
-This implementation guide describes the exchange of medical alert information using FHIR.
-
 ## Use cases
 
 The guide is designed to support common Swedish healthcare exchange scenarios, such as cross-organisational access (e.g., NPÖ) and regional synchronisation across systems. See [Use cases](use-cases.html) for detailed flows and recommended interactions (search, lifecycle, and optional provenance/source context).
@@ -27,12 +23,6 @@ The guide is designed to support common Swedish healthcare exchange scenarios, s
 ## Terminology
 
 To ensure consistent wording across the guide, use the preferred English terms listed in [Terminology and translations](translations.html).
-
-Here we can describe how the profile SEAlerInformationFlag should be used in combination with other referenced profiles. What we need to describe includes, among other things:
- - Activation and deactivation
- - Handling of non-structured attention information
-
-So far, I have only created profiles for the observations that deal with infections. The information in the National Board of Health and Welfare’s information model can be managed in different ways in FHIR. For example, infection-related information can be represented using the Condition resource but may also be described as an Observation. At this stage, I am considering initially testing whether the use of the resources Observation, Procedure, and AllergyIntolerance can cover the needs we have.
 
 <!-- Denna implementationsguide beskriver hur uppmärksamhetsinformation kan struktureras och utbytas med hjälp av HL7 FHIR-standardens resurser. Guiden är baserad på Socialstyrelsens informationsspecifikation för uppmärksamhetsinformation och syftar till att möjliggöra ett enhetligt och säkert informationsutbyte mellan vårdsystem, oberoende av leverantör.
 Uppmärksamhetsinformation innefattar uppgifter om patienters särskilda behov, risker eller andra förhållanden som är viktiga att beakta i vård- och omsorgssituationer. Informationen är avsedd att höja medvetenheten hos vårdpersonal och andra berörda aktörer, i syfte att bidra till en trygg, personcentrerad och säker vård.
