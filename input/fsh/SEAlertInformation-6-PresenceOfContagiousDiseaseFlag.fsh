@@ -22,6 +22,7 @@ InstanceOf: SEAlertInformation-6-PresenceOfContagiousDiseaseFlag
 Description: "Example of alert signal for presence of contagious disease"
 * status = #active
 * code = $ICD#A49.9 "Bakteriell infektion, ospecificerad"
+* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#blodsmitta-hos-gravid "Blodsmitta hos gravid"
 * subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationPresenceOfContagiousDiseaseSnomedCT

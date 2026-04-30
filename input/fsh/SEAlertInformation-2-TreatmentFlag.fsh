@@ -22,6 +22,7 @@ InstanceOf: SEAlertInformation-2-TreatmentFlag
 Description: "An example of the Swedish profile of the treatment Flag resource."
 * status = #active
 * code = $SCT#243142003 "BiPAP-behandling"
+* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#beroende-av-icke-invasiv-ventilation "Beroende av icke-invasiv ventilation"
 * subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationTreatmentATCVS

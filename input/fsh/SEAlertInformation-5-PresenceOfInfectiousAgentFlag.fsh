@@ -26,13 +26,25 @@ Description: "Codes for alert information about presence of infectious agent."
 ValueSet: SEICDPresenceOfInfectiousAgentVS
 Id: 1.2.752.116.3.1.16.1.5.1
 // Title: "Förekomst av smittämne ICD-10-SE"
-Title: "Presence of Infectious Agent ICD-10-SE"
+Title: "Presence of Infectious Agent ICD-10-SE combinations"
 // Description: "Koder i ICD-10 för förekomst av smittämne."
-Description: "ICD-10 codes for presence of infectious agent."
-* include $ICD#Z22.3 "Barare av andra specificerade bakteriella sjukdomar"
-* include $ICD#Z22.1 "Barare av andra specificerade tarminfektioner"
-* include $ICD#Z22.2 "Barare av difteri"
-* include $ICD#Z22.8 "Barare av andra infektionssjukdomar"
+Description: "Pre-coordinated combination codes representing ICD-10-SE code combinations for presence of infectious agent."
+* include codes from system SEAlertInformationInfectiousAgentICDCombinationCS
+
+CodeSystem: SEAlertInformationInfectiousAgentICDCombinationCS
+Id: SEAlertInformationInfectiousAgentICDCombinationCS
+Title: "Presence of Infectious Agent ICD-10-SE combinations"
+Description: "Local pre-coordinated codes for national ICD-10-SE combinations used for infectious agent alerts."
+* ^experimental = false
+* ^caseSensitive = true
+* #mrsa "MRSA (meticillinresistenta Staphylococcus aureus)"
+* #mrsa ^definition = "ICD-10-SE combination: Z22.3C + B95.6 + U82.1"
+* #vre "VRE (vankomycinresistenta enterokocker)"
+* #vre ^definition = "ICD-10-SE combination: Z22.3W + B95.2 + U83.0"
+* #esbl "Tarmbakterier som bildar ESBL"
+* #esbl ^definition = "ICD-10-SE combination: Z22.1 + B96.1 + U82.2"
+* #esbl-carba "Tarmbakterier som bildar ESBL CARBA"
+* #esbl-carba ^definition = "ICD-10-SE combination: Z22.1 + B96.1 + U82.5"
 
 ValueSet: SESCTInfectiousAgentAlertInformationVS
 Id: 59851000052108

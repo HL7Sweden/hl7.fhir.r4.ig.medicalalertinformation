@@ -24,6 +24,7 @@ InstanceOf: SEAlertInformation-1-OtherMedicalConditionFlag
 Description: "An example of the Swedish profile of the Flag resource."
 * status = #active
 * code = $ICD#T78.3 "Angioneurotiskt odem"
+* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#angioneurotiskt-odem "Angioneurotiskt ödem"
 * subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationMedicalConditionSnomedVS
@@ -76,6 +77,8 @@ Title: "Subset of medical conditions (attention information)"
 * include $SCT#237751000 "kongenital adrenal hyperplasi"
 * include $SCT#737315000 "enterokolit utlöst av födoämnesprotein"
 * include $SCT#439218000 "kirurgiskt anlagt arteriovenöst graft"
+* include $SCT#363732003 "Addisons sjukdom"
+* include $SCT#614151000052101
 
 ValueSet: SEAlertInformationOtherMedicalConditionICDVS
 Id: 1.2.752.116.3.1.16.1.1.1

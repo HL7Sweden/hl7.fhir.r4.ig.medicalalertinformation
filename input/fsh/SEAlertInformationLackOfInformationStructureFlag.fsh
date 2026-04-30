@@ -22,6 +22,7 @@ InstanceOf: SEAlertInformationFlag
 Description: "An example of the Swedish profile of the drug product Flag resource."
 * status = #active
 * code = $ICD#A49.9 "Bakteriell infektion, ospecificerad"
+* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#ej-strukturanpassad-uppmarksamhetsinformation "Ej strukturanpassad uppmärksamhetsinformation"
 * extension[flag-detail].valueReference = Reference(SEAlertInformationIncidenceOfInfectiousDiseaseObservationExample) "blodsmitta hos gravid"
 * subject = Reference(SEAlertInformationPatientExample)
 

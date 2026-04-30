@@ -4,6 +4,8 @@ This FHIR implementation guide is published by HL7 Sweden and expresses the prof
 Swedish National Board of Health and Welfare (Socialstyrelsen) specification
 <https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/>.
 
+This implementation guide follows version 6.1.2 of Socialstyrelsen's information specification for medical alert information.
+
 <!---
 Denna implementationsguide publiceras av HL7 Sverige och uttrycker de profiler som används för uppmärksamhetsinformation baserad på Socialstyrelsens informationsspecifikation för
 uppmärksamhetsinformation <https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/>.
@@ -23,6 +25,17 @@ The guide is designed to support common Swedish healthcare exchange scenarios, s
 ## Terminology
 
 To ensure consistent wording across the guide, use the preferred English terms listed in [Terminology and translations](translations.html).
+
+## Alert label usage
+
+Use `Flag.code` for the clinical terminology code (SNOMED CT, ICD-10-SE, or ATC).  
+Use `Flag.extension[alertLabel]` for the user-facing alert label that corresponds to the national code list published by Socialstyrelsen: <https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/>.
+
+For clients:
+
+- Display `extension[alertLabel].valueCodeableConcept` as the alert heading/title.
+- Display `code.coding` as the underlying terminology code for interoperability and decision support.
+- If `alertLabel` is missing, fall back to `code.text` and/or `code.coding.display`.
 
 <!-- Denna implementationsguide beskriver hur uppmärksamhetsinformation kan struktureras och utbytas med hjälp av HL7 FHIR-standardens resurser. Guiden är baserad på Socialstyrelsens informationsspecifikation för uppmärksamhetsinformation och syftar till att möjliggöra ett enhetligt och säkert informationsutbyte mellan vårdsystem, oberoende av leverantör.
 Uppmärksamhetsinformation innefattar uppgifter om patienters särskilda behov, risker eller andra förhållanden som är viktiga att beakta i vård- och omsorgssituationer. Informationen är avsedd att höja medvetenheten hos vårdpersonal och andra berörda aktörer, i syfte att bidra till en trygg, personcentrerad och säker vård.

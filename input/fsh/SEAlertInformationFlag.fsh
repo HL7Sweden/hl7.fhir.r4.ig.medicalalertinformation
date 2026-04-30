@@ -18,7 +18,9 @@ Description: "Swedish profile of the Flag resource used for alert information ba
 * subject only Reference(SEAlertInformationPatient)
 * extension contains http://hl7.org/fhir/StructureDefinition/flag-detail named flag-detail 0..*
 * extension contains CriticalityLevelExtension named criticalityLevel 0..1
+* extension contains AlertLabelExtension named alertLabel 0..1
 * extension[flag-detail].valueReference only Reference(Resource)
+* extension[alertLabel].valueCodeableConcept from SEAlertLabelVS (preferred)
 // todo: beskrivning för category
 * category from SEAlertInformationCategoryVS
 * extension[criticalityLevel] ^comment = "Indicates the severity level of the condition or event. 
@@ -33,6 +35,7 @@ InstanceOf: SEAlertInformationFlag
 Description: "An example of the Swedish profile of the Flag resource."
 * status = #active
 * code = $ICD#A49.9 "Bakteriell infektion, ospecificerad"
+* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#blodsmitta-hos-gravid "Blodsmitta hos gravid"
 * extension[flag-detail].valueReference = Reference(SEAlertInformationIncidenceOfInfectiousDiseaseObservationExample) "blodsmitta hos gravid"
 * subject = Reference(SEAlertInformationPatientExample)
 
@@ -54,6 +57,15 @@ Context: SEAlertInformationFlag
     These codes are mapped to the ValueSet 'AllergyIntoleranceCriticality' as follows: 'Discomforting' and 'Harmful' map to 'low', while 'Life-threatening' maps to 'high'. 
     The code 'unable-to-assess' is not permitted."
 
+Extension: AlertLabelExtension
+Id: SEAlertLabelExtension
+Title: "SE Alert Label Extension"
+Description: "Stores the alert label shown to end users, aligned with the national code list published by Socialstyrelsen."
+Context: SEAlertInformationFlag
+* value[x] only CodeableConcept
+* value[x] from SEAlertLabelVS (preferred)
+* value[x] ^binding.description = "Use SEAlertLabelVS when possible. If a label is missing, use code.text and extend the CodeSystem in a later release."
+
 // VerificationStatusExtension
 
 ValueSet: SEAlertInformationVS
@@ -70,7 +82,7 @@ Description: "Codes used for alert information."
 * include codes from valueset SEAlertInformationInfectiousDiseaseVS // Förekomst av smittsam sjukdom
 * include codes from valueset SEAlertInformationPresenceOfInfectiousAgentVS // Förekomst av smittämne
 * include codes from valueset SEAlertInformationChemicalAllergySnomedVS // Överkänslighet
-* include codes from valueset SEAlertInformationSpecialCareRoutineICD10SE // Information som kan leda till särskild vårdrutin
+* include codes from valueset SEAlertInformationSpecialCareRoutineSnomedCT // Information som kan leda till särskild vårdrutin
 * include codes from valueset SEAlertInformationDecisionSpecialCareRoutineSnomedCT // Beslut som kan leda till särskild vårdrutin
 * include codes from valueset SEAlertInformationDrugProductVS // Läkemedelsprodukt
 

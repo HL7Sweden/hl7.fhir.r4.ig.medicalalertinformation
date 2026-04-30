@@ -16,25 +16,17 @@ Description: "Indicates a decision that may lead to special care routines for th
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
 
-ValueSet: SEAlertInformationDecisionSpecialCareRoutineICD10SE
-// Title: "ICD-10-SE koder för beslut om särskild vårdrutin"
-Title: "ICD-10-SE codes for decision about special care routine"
-// Description: "Urval av ICD-10-SE koder relaterade till beslut om särskild vårdrutin."
-Description: "Selection of ICD-10-SE codes related to decision about special care routine."
-* include $ICD#Z22.3 "Bärare av Staphylococcus aureus"
-* include $ICD#Z22.1 "Bärare av vancomycinresistenta enterokocker"
-* include $ICD#Z22.2 "Bärare av ESBL-producerande bakterier"
-* include $ICD#Z22.4 "Bärare av multiresistenta bakterier"
-
 ValueSet: SEAlertInformationDecisionSpecialCareRoutineSnomedCT
+Id: 103491000052103
 // Title: "Snomed CT koder för beslut om särskild vårdrutin"
 Title: "Snomed CT codes for decision about special care routine"
 // Description: "Urval av Snomed CT koder relaterade till beslut om särskild vårdrutin."
 Description: "Selection of Snomed CT codes related to decision about special care routine."
-* include $SCT#432415000 "barare av meticillinresistent Staphylococcus aureus"
-* include $SCT#431109006 "barare av vankomycinresistenta enterokocker"
-* include $SCT#762988003 "barare av ESBL-producerande bakterier"
-* include $SCT#61751000052107 "barare av ESBL- och karbapenemasproducerande bakterier"
+* include $SCT#133571000052106 "utfärdande av förskrivningsrestriktion"
+* include $SCT#306103005 "hänvisning till specifik vårdenhet"
+* include $SCT#60741000052100 "läkarbeslut finns från brytpunktssamtal"
+* include $SCT#61921000052102 "läkarbeslut finns om att inte utföra hjärt-lungräddning"
+* include $SCT#61931000052100 "läkarbeslut finns om att avsluta livsuppehållande behandling"
 
 Mapping:  SEAlertInformation-9-DecisionSpecialCareRoutineFlagToUMI
 Source:   SEAlertInformation-9-DecisionSpecialCareRoutineFlag

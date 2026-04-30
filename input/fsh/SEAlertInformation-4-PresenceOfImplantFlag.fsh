@@ -34,10 +34,10 @@ Description: "Value set for presence of implant according to ICD-10-SE."
 * include $ICD#Z95.2 "Förekomst av hjärtklaffprotes av icke-biologiskt material"
 * include $ICD#Z95.4 "Förekomst av annan typ av hjärtklaffsersättning"
 * include $ICD#Z98.2 "Tillstånd med förekomst av hjälpmedel för dränage av cerebrospinalvätska"
-* include $ICD#Z96.0
-* include $ICD#Z96.2
-* include $ICD#Z96.8
-* include $ICD#Z99.4
+* include $ICD#Z96.0 "Artificiell uretrasfinkter"
+* include $ICD#Z96.2 "Cochleaimplantat"
+* include $ICD#Z96.8 "Förekomst av annat specificerat implantat"
+* include $ICD#Z99.4 "Hjärtpump för vänster kammare"
 
 ValueSet: SEAlertInformationPresenceOfImplantSnomedCTVS
 Id: SEImplantatSnomedCTVS
@@ -50,7 +50,7 @@ Description: "Value set for alert information about implant according to Snomed 
 * include $SCT#705991002 "mekanisk hjärtklaffprotes"
 * include $SCT#72821000052105 "mikrospiral, magnetisk metall"
 * include $SCT#72811000052102 "kärlklämma, magnetisk metall"
-* include $SCT#263805004 "magnetisk metall"
+* include $SCT#1010731003
 * include $SCT#258593008 "ventrikelshunt"
 * include $SCT#360100007 "trakeal stent"
 * include $SCT#69805005 "insulinpump"

@@ -21,6 +21,7 @@ InstanceOf: SEAlertInformationDrugProductFlag
 Description: "An example of the Swedish profile of the drug product Flag resource."
 * status = #active
 * code = $ICD#Z79.89 "Langtidsanvandning av andra specificerade lakemedel"
+* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#lakemedelsprodukt "Läkemedelsprodukt"
 * subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationDrugProductATCVS

@@ -1,5 +1,3 @@
-# Översättningar
-
 | Svenska | Engelska | Kommentar |
 |---|---|---|
 | Allvarlighetsgrad | Criticality level | Severity level |
