@@ -11,7 +11,8 @@ Description: "Indicates a decision that may lead to special care routines for th
 [Mapping to UMI](StructureDefinition-SEAlertInformation-9-DecisionSpecialCareRoutineFlag-mappings.html)"
 * code from SEAlertInformationDecisionSpecialCareRoutineSnomedCT (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #9 "DecisionSpecialCareRoutine"
+* category = #D2 "Decision that can lead to special care routine"
+// * category = #D2 "Beslut som kan leda till sarskild vardrutin"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
 
@@ -30,10 +31,10 @@ ValueSet: SEAlertInformationDecisionSpecialCareRoutineSnomedCT
 Title: "Snomed CT codes for decision about special care routine"
 // Description: "Urval av Snomed CT koder relaterade till beslut om särskild vårdrutin."
 Description: "Selection of Snomed CT codes related to decision about special care routine."
-* include $SCT#123456 "Bärare av Staphylococcus aureus"
-* include $SCT#234567 "Bärare av vancomycinresistenta enterokocker"
-* include $SCT#345678 "Bärare av ESBL-producerande bakterier"
-* include $SCT#456789 "Bärare av multiresistenta bakterier"
+* include $SCT#432415000 "barare av meticillinresistent Staphylococcus aureus"
+* include $SCT#431109006 "barare av vankomycinresistenta enterokocker"
+* include $SCT#762988003 "barare av ESBL-producerande bakterier"
+* include $SCT#61751000052107 "barare av ESBL- och karbapenemasproducerande bakterier"
 
 Mapping:  SEAlertInformation-9-DecisionSpecialCareRoutineFlagToUMI
 Source:   SEAlertInformation-9-DecisionSpecialCareRoutineFlag

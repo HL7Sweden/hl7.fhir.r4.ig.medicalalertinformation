@@ -14,7 +14,7 @@ fhirVersion: 4.0.1 # https://www.hl7.org/fhir/valueset-FHIR-version.html
 copyrightYear: 2025+
 releaseLabel: ci-build # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
 # license: CC0-1.0 # https://www.hl7.org/fhir/valueset-spdx-license.html
-# jurisdiction: urn:iso:std:iso:3166#US "United States of America" # https://www.hl7.org/fhir/valueset-jurisdiction.html
+jurisdiction: urn:iso:std:iso:3166#SE "Sweden" # https://www.hl7.org/fhir/valueset-jurisdiction.html
 publisher:
   name: HL7 Sweden
   url: http://hl7.se/
@@ -31,7 +31,7 @@ publisher:
 #     uri: http://hl7.org/fhir/us/mcode/ImplementationGuide/hl7.fhir.us.mcode
 #     version: 1.0.0
 dependencies:
-  hl7se.fhir.base: 1.0.0
+  hl7se.fhir.base: 1.1.0
 
 #
 #
@@ -49,7 +49,14 @@ dependencies:
 pages:
   index.md:
   flags.md:
-    title: Uppmärksamhetssignaler
+    title: Medical alert signals
+    # title: Uppmärksamhetssignaler
+  use-cases.md:
+    title: Use cases
+    # title: Användningsfall
+  translations.md:
+    title: Terminology and translations
+    # title: Terminologi och översättningar
 #   index.md:
 #     title: Example Home
 #   implementation.xml:
@@ -82,7 +89,12 @@ pages:
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
   Home: index.html
-  Alerts: flags.html
+  Medical alert signals: flags.html
+  Use cases: use-cases.html
+  Terminology: translations.html
+  # Uppmärksamhetssignaler: flags.html
+  # Användningsfall: use-cases.html
+  # Terminologi: translations.html
   Artifacts: artifacts.html
 
 # ╭───────────────────────────Less Common Implementation Guide Properties──────────────────────────╮

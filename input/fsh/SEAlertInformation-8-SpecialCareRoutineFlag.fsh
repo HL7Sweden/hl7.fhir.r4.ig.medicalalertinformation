@@ -11,7 +11,8 @@ Description: "Indicates information that may lead to special care routines for t
 [Mapping to UMI](StructureDefinition-SEAlertInformation-8-SpecialCareRoutineFlag-mappings.html)"
 * code from SEAlertInformationSpecialCareRoutineICD10SE (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #8 "SpecialCareRoutine"
+* category = #D1 "Information that can lead to special care routine"
+// * category = #D1 "Information som kan leda till sarskild vardrutin"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
 
@@ -30,10 +31,10 @@ ValueSet: SEAlertInformationSpecialCareRoutineSnomedCT
 Title: "Snomed CT codes for special care routine"
 // Description: "Urval av Snomed CT koder relaterade till särskild vårdrutin."
 Description: "Selection of Snomed CT codes related to special care routine."
-* include $SCT#123456 "Bärare av Staphylococcus aureus"
-* include $SCT#234567 "Bärare av vancomycinresistenta enterokocker"
-* include $SCT#345678 "Bärare av ESBL-producerande bakterier"
-* include $SCT#456789 "Bärare av multiresistenta bakterier"
+* include $SCT#432415000 "barare av meticillinresistent Staphylococcus aureus"
+* include $SCT#431109006 "barare av vankomycinresistenta enterokocker"
+* include $SCT#762988003 "barare av ESBL-producerande bakterier"
+* include $SCT#61751000052107 "barare av ESBL- och karbapenemasproducerande bakterier"
 
 Mapping:  SEAlertInformation-8-SpecialCareRoutineFlagToUMI
 Source:   SEAlertInformation-8-SpecialCareRoutineFlag

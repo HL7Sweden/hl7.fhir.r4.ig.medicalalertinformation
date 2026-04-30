@@ -14,16 +14,16 @@ Description: "A medical condition that is not an allergy, presence of infectious
 // * text.div = "markdown:SEAlertInformation-1-OtherMedicalConditionFlag-intro.md"
 * code from SEAlertInformationOtherMedicalConditionVS (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #1 "OtherMedicalCondition"
+* category = #A1 "Other medical condition"
+// * category = #A1 "Annat medicinskt tillstand"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
 
 Instance: SEAlertInformationOtherMedicalConditionFlagExample
-InstanceOf: SEAlertInformationFlag
+InstanceOf: SEAlertInformation-1-OtherMedicalConditionFlag
 Description: "An example of the Swedish profile of the Flag resource."
 * status = #active
-* code = $SCT#64301000052105 "blodsmitta hos gravid"
-* extension[flag-detail].valueReference = Reference(SEAlertInformationIncidenceOfInfectiousDiseaseObservationExample) "blodsmitta hos gravid"
+* code = $ICD#T78.3 "Angioneurotiskt odem"
 * subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationMedicalConditionSnomedVS

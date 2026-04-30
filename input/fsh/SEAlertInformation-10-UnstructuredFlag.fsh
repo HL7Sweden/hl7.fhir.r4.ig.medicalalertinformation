@@ -5,7 +5,8 @@ Description: "Non-structured attention information refers to historically record
 
 [Mapping to UMI](StructureDefinition-SEAlertInformation-10-UnstructuredFlag-mappings.html)"
 * subject only Reference(SEAlertInformationPatient)
-* category = #10 "Unstructured"
+* category = #E1 "Historically recorded medical alert information"
+// * category = #E1 "Historiskt angiven uppmarksamhetsinformation"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
 

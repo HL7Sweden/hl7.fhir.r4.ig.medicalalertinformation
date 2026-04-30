@@ -10,7 +10,8 @@ Description: "Indicates the presence of implants in the patient, such as medical
 * code from SEAlertInformationPresenceOfImplantVS (required)
 * subject only Reference(SEAlertInformationPatient)
 // * status from flag-status where code in { "active", "inactive" }
-* category = #A "Medicinska tillstånd och behandlingar"
+* category = #A4 "Presence of implant"
+// * category = #A4 "Forekomst av implantat"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
 
@@ -76,9 +77,9 @@ Id:       UMI
 Title:    "UMI"
 Description: "Description..."
 // * code -> "Implantation(Aktivitet).kod Förekomst av implantat(Observation).värde" 
-* code -> "Uppmärksamhetsinformation Förekomst av transplantat (1.2.752.116.3.1.16.1.4)"
+* code -> "Uppmarksamhetsinformation Forekomst av implantat (1.2.752.116.3.1.16.1.3)"
 // TODO: Lägg till mappning till aktiviteterna för att sätta status
-* status -> "Transplantation(Aktivitet) Avlägsnande av transplantat(Aktivitet) Förekomst av transplantat(Observation)" "Flag.status ska sättas enligt följande: observerad förekomst & negation = falskt→ active observerad förekomst & negation = sant → inactive. entered-in-error används inte."
-* period.start -> "Transplantation(Aktivitet).tid Förekomst av transplantat(Observation).tid" 
+* status -> "Implantation(Aktivitet) Avlagsnande av implantat(Aktivitet) Forekomst av implantat(Observation)" "Flag.status ska sattas enligt foljande: observerad forekomst & negation = falskt -> active observerad forekomst & negation = sant -> inactive. entered-in-error anvands inte."
+* period.start -> "Implantation(Aktivitet).tid Forekomst av implantat(Observation).tid" 
 * subject -> "Patient"
 * category -> "Typ av uppmärksamhetsinformation (huvudgrupp)"

@@ -1,7 +1,7 @@
-# HL7 FHIR version R4 alert information implementation guide for Sweden
+# HL7 FHIR R4 Medical alert information implementation guide for Sweden
 
-This FHIR implementation guide is published by HL7 Sweden and expresses the profiles used for alert information based on the 
-Swedich National Board of Social Affairs and Health (Socialstyrelsen) specification 
+This FHIR implementation guide is published by HL7 Sweden and expresses the profiles used for medical alert information based on the
+Swedish National Board of Health and Welfare (Socialstyrelsen) specification
 <https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/>.
 
 <!---
@@ -12,13 +12,21 @@ uppmärksamhetsinformation <https://www.socialstyrelsen.se/kunskapsstod-och-regl
 <!-- # Användningsbeskrivning -->
 # Usage Description
 
-This implementation guide describes how attention information can be structured and exchanged using the resources of the HL7 FHIR standard. The guide is based on the National Board of Health and Welfare’s (Socialstyrelsen’s) information specification for attention information and aims to enable uniform and secure information exchange between healthcare systems, regardless of vendor. Attention information includes data on patients’ special needs, risks, or other circumstances that are important to consider in healthcare and social care situations. The information is intended to raise awareness among healthcare professionals and other relevant stakeholders, with the purpose of contributing to safe, person-centered, and secure care.
+This implementation guide describes how medical alert information can be structured and exchanged using the resources of the HL7 FHIR standard. The guide is based on the National Board of Health and Welfare’s (Socialstyrelsen’s) information specification for medical alert information and aims to enable uniform and secure information exchange between healthcare systems, regardless of vendor. Medical alert information includes data on patients’ special needs, risks, or other circumstances that are important to consider in healthcare and social care situations. The information is intended to raise awareness among healthcare professionals and other relevant stakeholders, with the purpose of contributing to safe, person-centered, and secure care.
 
-The implementation guide defines specialized FHIR profiles, value sets, codes, and examples that comply with the National Board of Health and Welfare’s national guidelines and conceptual models. It is intended to support technical integrations and interoperability between information systems in healthcare and social care. The target audience for the guide includes information managers, system administrators, developers, and others working with the implementation of FHIR-based information exchange in health and social care.
+The implementation guide defines specialized FHIR profiles, value sets, code systems, and examples that comply with the National Board of Health and Welfare’s national guidelines and conceptual models. It is intended to support technical integrations and interoperability between information systems in healthcare and social care. The target audience for the guide includes information managers, system administrators, developers, and others working with the implementation of FHIR-based information exchange in health and social care.
 
 ⸻
 
-This implementation guide describes the exchange of attention information using FHIR.
+This implementation guide describes the exchange of medical alert information using FHIR.
+
+## Use cases
+
+The guide is designed to support common Swedish healthcare exchange scenarios, such as cross-organisational access (e.g., NPÖ) and regional synchronisation across systems. See [Use cases](use-cases.html) for detailed flows and recommended interactions (search, lifecycle, and optional provenance/source context).
+
+## Terminology
+
+To ensure consistent wording across the guide, use the preferred English terms listed in [Terminology and translations](translations.html).
 
 Here we can describe how the profile SEAlerInformationFlag should be used in combination with other referenced profiles. What we need to describe includes, among other things:
  - Activation and deactivation

@@ -11,16 +11,16 @@ Title: "SE AlertInformation Drug Product Flag Profile"
 Description: "Swedish profile of the Flag resource used for alert information about drug products."
 * code from SEAlertInformationDrugProductVS (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #A
+* category = #C4 "Medicinal product"
+// * category = #C4 "Läkemedelsprodukt"
 // * extension[flag-detail].valueReference only Reference(MedicationRequest)
 
 Instance: SEAlertInformationDrugProductFlagExample
-InstanceOf: SEAlertInformationFlag
+InstanceOf: SEAlertInformationDrugProductFlag
 // Description: "Exempel på svensk profil för läkemedelsuppmärksamhetssignal."
 Description: "An example of the Swedish profile of the drug product Flag resource."
 * status = #active
-* code = $SCT#64301000052105 "blodsmitta hos gravid"
-* extension[flag-detail].valueReference = Reference(SEAlertInformationIncidenceOfInfectiousDiseaseObservationExample) "blodsmitta hos gravid"
+* code = $ICD#Z79.89 "Langtidsanvandning av andra specificerade lakemedel"
 * subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationDrugProductATCVS

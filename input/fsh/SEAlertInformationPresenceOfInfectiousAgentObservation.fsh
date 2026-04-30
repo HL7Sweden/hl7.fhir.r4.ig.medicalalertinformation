@@ -16,6 +16,6 @@ InstanceOf: SEAlertInformationPresenceOfInfectiousAgentObservation
 Description: "An example of the Swedish profile for the observation of incidence 
                 of infectious disease used as reference to the profile SEBaseFlag."
 * status = #final
-* code = $SCT#432415000 "bärare av meticillinresistent Staphylococcus aureus"
-* subject = Reference(Patient/example) "Förnamn Efternamn"
+* code = http://hl7.org/fhir/sid/icd-10#Z22.3 "Barare av andra specificerade bakteriella sjukdomar"
+* subject = Reference(SEAlertInformationPatientExample) "Patient example"
 

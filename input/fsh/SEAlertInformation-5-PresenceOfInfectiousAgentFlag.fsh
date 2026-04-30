@@ -9,7 +9,8 @@ Description: "Indicates the presence of an infectious agent in the patient, such
 [Mapping to UMI](StructureDefinition-SEAlertInformation-5-PresenceOfInfectiousAgentFlag-mappings.html)"
 * code from SEAlertInformationPresenceOfInfectiousAgentVS (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #5 "Presence of Infectious Agent"
+* category = #B1 "Presence of infectious agent"
+// * category = #B1 "Forekomst av smittamne"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
 
@@ -28,10 +29,10 @@ Id: 1.2.752.116.3.1.16.1.5.1
 Title: "Presence of Infectious Agent ICD-10-SE"
 // Description: "Koder i ICD-10 för förekomst av smittämne."
 Description: "ICD-10 codes for presence of infectious agent."
-* include $ICD#Z22.3W+B95.6+U82.1 "Bärare av stafylokocker + Staphylococcus aureus som orsak till sjukdomar som klassificeras i andra kapitel + Resistens mot meticillin"
-* include $ICD#Z22.3C+B95.2+U83.0 "Bärare av ESBL-producerande bakterier + Streptokocker grupp D och enterokocker som orsak till sjukdomar som klassificeras i andra kapitel + Resistens mot vankomycin"
-* include $ICD#Z22.3C+B96.1+U82.2 "Bärare av ESBL- och karbapenemasproducerande bakterier + Klebsiella pneumoniae som orsak till sjukdomar som klassificeras i andra kapitel + Resistens på grund av betalaktamaser med utvidgat spektrum (ESBL)"
-* include $ICD#Z22.1+B96.1+U82.2C "Bärare av andra patogena tarmbakterier + Klebsiella pneumoniae som orsak till sjukdomar som klassificeras i andra kapitel + ESBL-CARBA"
+* include $ICD#Z22.3 "Barare av andra specificerade bakteriella sjukdomar"
+* include $ICD#Z22.1 "Barare av andra specificerade tarminfektioner"
+* include $ICD#Z22.2 "Barare av difteri"
+* include $ICD#Z22.8 "Barare av andra infektionssjukdomar"
 
 ValueSet: SESCTInfectiousAgentAlertInformationVS
 Id: 59851000052108

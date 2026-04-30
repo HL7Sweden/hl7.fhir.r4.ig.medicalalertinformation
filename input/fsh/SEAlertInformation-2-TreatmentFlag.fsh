@@ -13,15 +13,15 @@ Description: "Interventions aimed at preventing illness, or preserving or improv
 [Mapping to UMI](StructureDefinition-SEAlertInformation-2-TreatmentFlag-mappings.html)"
 * code from SEAlertInformationTreatmentVS (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #2 "Treatment"
+* category = #A2 "Treatment"
+// * category = #A2 "Behandling"
 // * extension[flag-detail].valueReference only Reference(Procedure)
 
 Instance: SEAlertInformationTreatmentFlagExample
 InstanceOf: SEAlertInformation-2-TreatmentFlag
 Description: "An example of the Swedish profile of the treatment Flag resource."
 * status = #active
-* code = $SCT#64301000052105 "blodsmitta hos gravid"
-* extension[flag-detail].valueReference = Reference(SEAlertInformationIncidenceOfInfectiousDiseaseObservationExample) "blodsmitta hos gravid"
+* code = $SCT#243142003 "BiPAP-behandling"
 * subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationTreatmentATCVS

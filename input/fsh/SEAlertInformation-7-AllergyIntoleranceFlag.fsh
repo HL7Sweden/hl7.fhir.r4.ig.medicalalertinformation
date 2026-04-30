@@ -9,7 +9,8 @@ Description: "Indicates a hypersensitivity to a specific chemical, active substa
 [Mapping to UMI](StructureDefinition-SEAlertInformation-7-AllergyIntoleranceFlag-mappings.html)"
 * code from SEAlertInformationChemicalAllergySnomedVS (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #7 "Allergy Intolerance"
+* category = #C1 "Hypersensitivity condition"
+// * category = #C1 "Overkanslighetstillstand"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
 

@@ -14,12 +14,11 @@ Title: "SE AlertInformation Flag Profile"
 Description: "Swedish profile of the Flag resource used for alert information based on the 
     Swedish National Board of Social Affairs and Health (Socialstyrelsen) specification 
     https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/."
-* code from SEAlertInformationVS (required)
+* code 1..1
 * subject only Reference(SEAlertInformationPatient)
 * extension contains http://hl7.org/fhir/StructureDefinition/flag-detail named flag-detail 0..*
 * extension contains CriticalityLevelExtension named criticalityLevel 0..1
-* extension[flag-detail].valueReference only Reference(SEAlertInformationIncidenceOfInfectiousDiseaseObservation or
-                                                            SEAlertInformationPresenceOfInfectiousAgentObservation)
+* extension[flag-detail].valueReference only Reference(Resource)
 // todo: beskrivning för category
 * category from SEAlertInformationCategoryVS
 * extension[criticalityLevel] ^comment = "Indicates the severity level of the condition or event. 
@@ -33,7 +32,7 @@ InstanceOf: SEAlertInformationFlag
 // Description: "Exempel på svensk profil för Flag resource."
 Description: "An example of the Swedish profile of the Flag resource."
 * status = #active
-* code = $SCT#64301000052105 "blodsmitta hos gravid"
+* code = $ICD#A49.9 "Bakteriell infektion, ospecificerad"
 * extension[flag-detail].valueReference = Reference(SEAlertInformationIncidenceOfInfectiousDiseaseObservationExample) "blodsmitta hos gravid"
 * subject = Reference(SEAlertInformationPatientExample)
 
@@ -64,8 +63,16 @@ Title: "Alert Information"
 // Description: "Koder som används för uppmärksamhetsinformation."
 Description: "Codes used for alert information."
 // url, status, purpose, and other metadata could be defined here using caret syntax (omitted)
+* include codes from valueset SEAlertInformationOtherMedicalConditionVS // Annat medicinskt tillstånd
+* include codes from valueset SEAlertInformationTreatmentVS // Behandling
+* include codes from valueset SEAlertInformationPresenceOfGraftsConditionVS // Förekomst av transplantat
+* include codes from valueset SEAlertInformationPresenceOfImplantVS // Förekomst av implantat
 * include codes from valueset SEAlertInformationInfectiousDiseaseVS // Förekomst av smittsam sjukdom
 * include codes from valueset SEAlertInformationPresenceOfInfectiousAgentVS // Förekomst av smittämne
+* include codes from valueset SEAlertInformationChemicalAllergySnomedVS // Överkänslighet
+* include codes from valueset SEAlertInformationSpecialCareRoutineICD10SE // Information som kan leda till särskild vårdrutin
+* include codes from valueset SEAlertInformationDecisionSpecialCareRoutineSnomedCT // Beslut som kan leda till särskild vårdrutin
+* include codes from valueset SEAlertInformationDrugProductVS // Läkemedelsprodukt
 
 CodeSystem: SEAlertInformationCategoryCS
 Id: SEAlertInformationCategoryCS
@@ -74,25 +81,28 @@ Title: "Type of alert information"
 // Description: "Kategorisering av uppmärksamhetsinformation."
 Description: "Categorization of alert information."
 * ^hierarchyMeaning = #is-a
+* ^experimental = false
+* ^caseSensitive = true
 // url, status, purpose, and other metadata could be defined here using caret syntax (omitted)
-* #A "Medicinska tillstånd och behandlingar"
-// * #A #A1 "Annat medicinskt tillstånd"                            //SEAlertInformationFlag
-// * #A #A2 "Behandling"
-// * #A #A3 "Förekomst av implantat Implantat"
-// * #A #A4 "Förekomst av transplantat Transplantat"
-* #B "Smitta"
-// * #B #B1 "Förekomst av smittämne"                                //SEAlertInformationPresenceOfInfectiousAgentObservation
-// * #B #B2 "Förekomst av smittsam sjukdom"                         //SEAlertInformationIncidenceOfInfectiousDiseaseObservation
-* #C "Överkänslighet"
-// * #C #C1 "Kemikalie"
-// * #C #C2 "Aktiv substans"
-// * #C #C3 "Hjälpämne läkemedel"
-// * #C #C4 "Läkemedelsprodukt"
-* #D "Särskild vårdrutin"
-// * #D #D1 "Information som kan leda till särskild vårdrutin"
-// * #D #D2 "Beslut som kan leda till särskild vårdrutin"
-* #E "Ej strukturanpassad uppmärksamhetsinformation"
-// * #E #E1 "Historiskt angiven uppmärksamhetsinformation"
+* #A "Medical conditions and treatments" // Medicinska tillstånd och behandlingar
+* #A ^definition = "Medical alert information about medical conditions and treatments."
+* #A #A1 "Other medical condition" // Annat medicinskt tillstånd
+* #A #A2 "Treatment" // Behandling
+* #A #A3 "Presence of transplant" // Förekomst av transplantat
+* #A #A4 "Presence of implant" // Förekomst av implantat
+* #B "Infection" // Smitta
+* #B #B1 "Presence of infectious agent" // Förekomst av smittämne
+* #B #B2 "Presence of infectious disease" // Förekomst av smittsam sjukdom
+* #C "Hypersensitivity" // Överkänslighet
+* #C #C1 "Hypersensitivity condition" // Överkänslighetstillstånd
+* #C #C2 "Active substance" // Aktiv substans
+* #C #C3 "Excipient" // Hjälpämne läkemedel
+* #C #C4 "Medicinal product" // Läkemedelsprodukt
+* #D "Special care routine" // Särskild vårdrutin
+* #D #D1 "Information that can lead to special care routine" // Information som kan leda till särskild vårdrutin
+* #D #D2 "Decision that can lead to special care routine" // Beslut som kan leda till särskild vårdrutin
+* #E "Unstructured medical alert information" // Ej strukturanpassad uppmärksamhetsinformation
+* #E #E1 "Historically recorded medical alert information" // Historiskt angiven uppmärksamhetsinformation
 
 ValueSet: SEAlertInformationCategoryVS
 Id: SEAlertInformationCategoryVS
@@ -109,7 +119,10 @@ Id: SEAlertInformationCriticalityLevelCS
 Title: "Criticality Level"
 // Description: "Allvarlighetsgrad för överkänslighet"
 Description: "Criticality level for allergy."
+* ^experimental = false
+* ^caseSensitive = true
 * #442452003 "Life-threatening" //Livshotande
+* #442452003 ^definition = "Allergireaktion med livshotande allvarlighetsgrad."
 * #59021000052107 "Harmful" //Skadlig
 * #59031000052109 "Discomforting" //Besvärande
 

@@ -9,18 +9,19 @@ Title: "SE AlertInformation 6 Presence of Contagious Disease"
 Description: "Indicates the presence of a contagious disease in the patient, such as diseases that can be transmitted between individuals. Attention information regarding a contagious disease is considered current if there is a documented occurrence of the disease in the patient, and no later record indicating that the disease is no longer present.
 
 [Mapping to UMI](StructureDefinition-SEAlertInformation-6-PresenceOfContagiousDiseaseFlag-mappings.html)"
-* code from SEAlertInformationPresenceOfContagiousDiseaseSnomedCT (required)
+* code from SEAlertInformationInfectiousDiseaseVS (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #6 "PresenceOfContagiousDisease"
+* category = #B2 "Presence of infectious disease"
+// * category = #B2 "Forekomst av smittsam sjukdom"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
 
 Instance: SEAlertInformation-6-PresenceOfContagiousDiseaseFlagExample
-InstanceOf: SEAlertInformationFlag
+InstanceOf: SEAlertInformation-6-PresenceOfContagiousDiseaseFlag
 // Description: "Exempel på uppmärksamhetssignal för förekomst av smittsam sjukdom"
 Description: "Example of alert signal for presence of contagious disease"
 * status = #active
-* code = $SCT#64301000052105 "blodsmitta hos gravid"
+* code = $ICD#A49.9 "Bakteriell infektion, ospecificerad"
 * subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationPresenceOfContagiousDiseaseSnomedCT
