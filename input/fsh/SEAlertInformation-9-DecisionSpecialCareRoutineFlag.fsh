@@ -11,10 +11,18 @@ Description: "Indicates a decision that may lead to special care routines for th
 [Mapping to UMI](StructureDefinition-SEAlertInformation-9-DecisionSpecialCareRoutineFlag-mappings.html)"
 * code from SEAlertInformationDecisionSpecialCareRoutineSnomedCT (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #D2 "Decision that can lead to special care routine"
+* category = SEAlertInformationCategoryCS#D2 "Decision that can lead to special care routine"
 // * category = #D2 "Beslut som kan leda till sarskild vardrutin"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
+
+Instance: SEAlertInformation-9-DecisionSpecialCareRoutineFlagExample
+InstanceOf: SEAlertInformation-9-DecisionSpecialCareRoutineFlag
+Description: "Minimal example of a decision that may lead to a special care routine."
+* status = #active
+* code = $SCT#306103005 "Referral to department"
+* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#blodsmitta-hos-gravid "Blodsmitta hos gravid"
+* subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationDecisionSpecialCareRoutineSnomedCT
 Id: 103491000052103
@@ -22,15 +30,16 @@ Id: 103491000052103
 Title: "Snomed CT codes for decision about special care routine"
 // Description: "Urval av Snomed CT koder relaterade till beslut om särskild vårdrutin."
 Description: "Selection of Snomed CT codes related to decision about special care routine."
-* include $SCT#133571000052106 "utfärdande av förskrivningsrestriktion"
+* ^experimental = false
+* include $SESCT#"133571000052106" "utfärdande av förskrivningsrestriktion"
 * include $SCT#306103005 "hänvisning till specifik vårdenhet"
-* include $SCT#60741000052100 "läkarbeslut finns från brytpunktssamtal"
-* include $SCT#61921000052102 "läkarbeslut finns om att inte utföra hjärt-lungräddning"
-* include $SCT#61931000052100 "läkarbeslut finns om att avsluta livsuppehållande behandling"
+* include $SESCT#"60741000052100" "läkarbeslut finns från brytpunktssamtal"
+* include $SESCT#"61921000052102" "läkarbeslut finns om att inte utföra hjärt-lungräddning"
+* include $SESCT#"61931000052100" "läkarbeslut finns om att avsluta livsuppehållande behandling"
 
 Mapping:  SEAlertInformation-9-DecisionSpecialCareRoutineFlagToUMI
 Source:   SEAlertInformation-9-DecisionSpecialCareRoutineFlag
-Target:   "UMI"
+Target: "https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/"
 Id:       UMI
 Title:    "UMI"
 Description: "Description..."

@@ -11,7 +11,7 @@ Description: "Indicates the presence of a contagious disease in the patient, suc
 [Mapping to UMI](StructureDefinition-SEAlertInformation-6-PresenceOfContagiousDiseaseFlag-mappings.html)"
 * code from SEAlertInformationInfectiousDiseaseVS (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #B2 "Presence of infectious disease"
+* category = SEAlertInformationCategoryCS#B2 "Presence of infectious disease"
 // * category = #B2 "Forekomst av smittsam sjukdom"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
@@ -21,7 +21,7 @@ InstanceOf: SEAlertInformation-6-PresenceOfContagiousDiseaseFlag
 // Description: "Exempel på uppmärksamhetssignal för förekomst av smittsam sjukdom"
 Description: "Example of alert signal for presence of contagious disease"
 * status = #active
-* code = $ICD#A49.9 "Bakteriell infektion, ospecificerad"
+* code = $ICD10SE#"A49.9" "Bakteriell infektion, ospecificerad"
 * extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#blodsmitta-hos-gravid "Blodsmitta hos gravid"
 * subject = Reference(SEAlertInformationPatientExample)
 
@@ -31,11 +31,12 @@ Id: 60661000052106
 Title: "Selection of contagious diseases, alert information"
 // Description: "Urval av Snomed CT koder relaterade till smittsamma sjukdomar."
 Description: "Selection of Snomed CT codes related to contagious diseases."
-* include $SCT#64301000052105 "blodsmitta hos gravid"
+* ^experimental = false
+* include $SESCT#"64301000052105" "blodsmitta hos gravid"
 
 Mapping:  SEAlertInformation-6-PresenceOfContagiousDiseaseFlagToUMI
 Source:   SEAlertInformation-6-PresenceOfContagiousDiseaseFlag
-Target:   "UMI"
+Target: "https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/"
 Id:       UMI
 Title:    "UMI"
 Description: "Description..."

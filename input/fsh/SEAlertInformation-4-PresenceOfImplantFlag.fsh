@@ -10,10 +10,18 @@ Description: "Indicates the presence of implants in the patient, such as medical
 * code from SEAlertInformationPresenceOfImplantVS (required)
 * subject only Reference(SEAlertInformationPatient)
 // * status from flag-status where code in { "active", "inactive" }
-* category = #A4 "Presence of implant"
+* category = SEAlertInformationCategoryCS#A4 "Presence of implant"
 // * category = #A4 "Forekomst av implantat"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
+
+Instance: SEAlertInformation-4-PresenceOfImplantFlagExample
+InstanceOf: SEAlertInformation-4-PresenceOfImplantFlag
+Description: "Minimal example of alert information about presence of an implant."
+* status = #active
+* code = $ICD10SE#"Z95.0" "Förekomst av elektronisk kardiell anordning"
+* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#blodsmitta-hos-gravid "Blodsmitta hos gravid"
+* subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationPresenceOfImplantVS
 Id: a1.2.752.116.3.1.16.1.3.1
@@ -21,6 +29,7 @@ Id: a1.2.752.116.3.1.16.1.3.1
 Title: "Alert Information Presence of Implant"
 // Description: "Uppmärksamhetsinformation Förekomst av implantat."
 Description: "Alert information about presence of implant."
+* ^experimental = false
 * include codes from valueset SEAlertInformationPresenceOfImplantICD10SEVS
 * include codes from valueset SEAlertInformationPresenceOfImplantSnomedCTVS
 
@@ -30,14 +39,15 @@ Id: SEImplantatICD10SEVS
 Title: "Presence of Implant ICD-10-SE"
 // Description: "Valuesets för förekomsten av implantat enligt ICD-10-SE."
 Description: "Value set for presence of implant according to ICD-10-SE."
-* include $ICD#Z95.0 "Förekomst av elektronisk kardiell anordning"
-* include $ICD#Z95.2 "Förekomst av hjärtklaffprotes av icke-biologiskt material"
-* include $ICD#Z95.4 "Förekomst av annan typ av hjärtklaffsersättning"
-* include $ICD#Z98.2 "Tillstånd med förekomst av hjälpmedel för dränage av cerebrospinalvätska"
-* include $ICD#Z96.0 "Artificiell uretrasfinkter"
-* include $ICD#Z96.2 "Cochleaimplantat"
-* include $ICD#Z96.8 "Förekomst av annat specificerat implantat"
-* include $ICD#Z99.4 "Hjärtpump för vänster kammare"
+* ^experimental = false
+* include $ICD10SE#"Z95.0" "Förekomst av elektronisk kardiell anordning"
+* include $ICD10SE#"Z95.2" "Förekomst av hjärtklaffprotes av icke-biologiskt material"
+* include $ICD10SE#"Z95.4" "Förekomst av annan typ av hjärtklaffsersättning"
+* include $ICD10SE#"Z98.2" "Tillstånd med förekomst av hjälpmedel för dränage av cerebrospinalvätska"
+* include $ICD10SE#"Z96.0" "Artificiell uretrasfinkter"
+* include $ICD10SE#"Z96.2" "Cochleaimplantat"
+* include $ICD10SE#"Z96.8" "Förekomst av annat specificerat implantat"
+* include $ICD10SE#"Z99.4" "Hjärtpump för vänster kammare"
 
 ValueSet: SEAlertInformationPresenceOfImplantSnomedCTVS
 Id: SEImplantatSnomedCTVS
@@ -45,11 +55,12 @@ Id: SEImplantatSnomedCTVS
 Title: "Alert Information Implant Snomed CT"
 // Description: "Valuesets för uppmärksamhetsinformation om implantat enligt Snomed CT."
 Description: "Value set for alert information about implant according to Snomed CT."
+* ^experimental = false
 * include $SCT#72506001 "implanterbar defibrillator"
 * include $SCT#14106009 "pacemaker"
 * include $SCT#705991002 "mekanisk hjärtklaffprotes"
-* include $SCT#72821000052105 "mikrospiral, magnetisk metall"
-* include $SCT#72811000052102 "kärlklämma, magnetisk metall"
+* include $SESCT#"72821000052105" "mikrospiral, magnetisk metall"
+* include $SESCT#"72811000052102" "kärlklämma, magnetisk metall"
 * include $SCT#1010731003
 * include $SCT#258593008 "ventrikelshunt"
 * include $SCT#360100007 "trakeal stent"
@@ -72,7 +83,7 @@ Description: "Value set for alert information about implant according to Snomed 
 
 Mapping:  SEAlertInformation-4-PresenceOfImplantFlagToUMI
 Source:   SEAlertInformation-4-PresenceOfImplantFlag
-Target:   "UMI"
+Target: "https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/"
 Id:       UMI
 Title:    "UMI"
 Description: "Description..."

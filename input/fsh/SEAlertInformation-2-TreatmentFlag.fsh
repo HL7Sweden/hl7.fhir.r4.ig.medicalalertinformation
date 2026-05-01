@@ -3,7 +3,7 @@
 // SUSHI will look for definitions in any file using the .fsh ending.
 Alias: $SCT = http://snomed.info/sct
 Alias: $ICD = http://hl7.org/fhir/sid/icd-10
-Alias: $ATC = https://nzhts.digital.health.nz/fhir/ValueSet/atc-code
+Alias: $ATC = http://www.whocc.no/atc
 
 Profile: SEAlertInformation-2-TreatmentFlag
 Parent: SEAlertInformationFlag
@@ -13,7 +13,7 @@ Description: "Interventions aimed at preventing illness, or preserving or improv
 [Mapping to UMI](StructureDefinition-SEAlertInformation-2-TreatmentFlag-mappings.html)"
 * code from SEAlertInformationTreatmentVS (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #A2 "Treatment"
+* category = SEAlertInformationCategoryCS#A2 "Treatment"
 // * category = #A2 "Behandling"
 // * extension[flag-detail].valueReference only Reference(Procedure)
 
@@ -29,6 +29,8 @@ ValueSet: SEAlertInformationTreatmentATCVS
 Id: 1.2.752.116.3.1.16.1.2.2
 Title: "Treatment – ATC"
 //Title: "Behandling ATC"
+Description: "ATC codes for treatment-related alert information."
+* ^experimental = false
 * include $ATC#B01AA "Vitamin K-antagonister"
 * include $ATC#B01AB "Heparingruppen"
 * include $ATC#B01AE "Direkt trombinhämmande medel"
@@ -42,13 +44,17 @@ ValueSet: SEAlertInformationTreatmentICDVS
 Id: 1.2.752.116.3.1.16.1.2.1
 Title: "Treatment - ICD-10-SE"
 //Title: "Behandling ICD-10-SE"
-* include $ICD#Z92.1 "Långtidsanvändning (och pågående användning) av blodförtunnande medel i den egna sjukhistorien"
-* include $ICD#Z99.2 "Beroende av njurdialys"
+Description: "ICD-10-SE codes for treatment-related alert information."
+* ^experimental = false
+* include $ICD10SE#"Z92.1" "Långtidsanvändning (och pågående användning) av blodförtunnande medel i den egna sjukhistorien"
+* include $ICD10SE#"Z99.2" "Beroende av njurdialys"
 
 ValueSet: SEAlertInformationTreatmentSnomedVS
 Id: 59831000052104
 Title: "Subset of treatments, attention information"
 //Title: "Urval behandlingar, uppmärksamhetsinformation"
+Description: "SNOMED CT subset for treatment-related alert information."
+* ^experimental = false
 * include $SCT#243142003 "BiPAP-behandling"
 * include $SCT#385971003 "dialysbehandling"
 
@@ -56,13 +62,15 @@ ValueSet: SEAlertInformationTreatmentVS
 Id: 1.2.752.116.3.1.16.1.2
 Title: "Attention information – Treatment"
 //Title: "Uppmärksamhetsinformation Behandling"
+Description: "Combined value set for treatment-related alert information."
+* ^experimental = false
 * include codes from valueset SEAlertInformationTreatmentATCVS
 * include codes from valueset SEAlertInformationTreatmentICDVS
 * include codes from valueset SEAlertInformationTreatmentSnomedVS
 
 Mapping:  SEAlertInformation-2-TreatmentFlagToUMI
 Source:   SEAlertInformation-2-TreatmentFlag
-Target:   "UMI"
+Target: "https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/"
 Id:       UMI
 Title:    "UMI"
 Description: "Description..."

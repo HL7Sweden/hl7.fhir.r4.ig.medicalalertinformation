@@ -11,10 +11,18 @@ Description: "Indicates information that may lead to special care routines for t
 [Mapping to UMI](StructureDefinition-SEAlertInformation-8-SpecialCareRoutineFlag-mappings.html)"
 * code from SEAlertInformationSpecialCareRoutineSnomedCT (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #D1 "Information that can lead to special care routine"
+* category = SEAlertInformationCategoryCS#D1 "Information that can lead to special care routine"
 // * category = #D1 "Information som kan leda till sarskild vardrutin"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
+
+Instance: SEAlertInformation-8-SpecialCareRoutineFlagExample
+InstanceOf: SEAlertInformation-8-SpecialCareRoutineFlag
+Description: "Minimal example of information that may lead to a special care routine."
+* status = #active
+* code = $SCT#699128009 "Blood transfusion declined"
+* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#blodsmitta-hos-gravid "Blodsmitta hos gravid"
+* subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationSpecialCareRoutineSnomedCT
 Id: 59881000052100
@@ -22,15 +30,16 @@ Id: 59881000052100
 Title: "Snomed CT codes for special care routine"
 // Description: "Urval av Snomed CT koder relaterade till särskild vårdrutin."
 Description: "Selection of Snomed CT codes related to special care routine."
-* include $SCT#1304232008
-* include $SCT#60761000052104 "avböjt autolog blodtransfusion eller cell saver"
-* include $SCT#60781000052105 "hotbild mot patient"
+* ^experimental = false
+* include $SESCT#"1304232008"
+* include $SESCT#"60761000052104" "avböjt autolog blodtransfusion eller cell saver"
+* include $SESCT#"60781000052105" "hotbild mot patient"
 * include $SCT#699128009 "avböjt transfusion av blodprodukt"
 * include $SCT#713670002 "deltar i klinisk läkemedelsprövning"
 
 Mapping:  SEAlertInformation-8-SpecialCareRoutineFlagToUMI
 Source:   SEAlertInformation-8-SpecialCareRoutineFlag
-Target:   "UMI"
+Target: "https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/"
 Id:       UMI
 Title:    "UMI"
 Description: "Description..."

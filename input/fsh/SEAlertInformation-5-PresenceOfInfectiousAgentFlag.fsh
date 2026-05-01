@@ -9,10 +9,18 @@ Description: "Indicates the presence of an infectious agent in the patient, such
 [Mapping to UMI](StructureDefinition-SEAlertInformation-5-PresenceOfInfectiousAgentFlag-mappings.html)"
 * code from SEAlertInformationPresenceOfInfectiousAgentVS (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #B1 "Presence of infectious agent"
+* category = SEAlertInformationCategoryCS#B1 "Presence of infectious agent"
 // * category = #B1 "Forekomst av smittamne"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
+
+Instance: SEAlertInformation-5-PresenceOfInfectiousAgentFlagExample
+InstanceOf: SEAlertInformation-5-PresenceOfInfectiousAgentFlag
+Description: "Minimal example of alert information about presence of an infectious agent."
+* status = #active
+* code = $SCT#432415000 "MRSA (methicillin resistant Staphylococcus aureus) carrier"
+* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#blodsmitta-hos-gravid "Blodsmitta hos gravid"
+* subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationPresenceOfInfectiousAgentVS
 Id: 1.2.752.116.3.1.16.1.5
@@ -20,6 +28,7 @@ Id: 1.2.752.116.3.1.16.1.5
 Title: "Alert Information Presence of Infectious Agent"
 // Description: "Koder för uppmärksamhetsinformation om förekomst av smittämne."
 Description: "Codes for alert information about presence of infectious agent."
+* ^experimental = false
 * include codes from valueset SEICDPresenceOfInfectiousAgentVS
 * include codes from valueset SESCTInfectiousAgentAlertInformationVS
 
@@ -29,6 +38,7 @@ Id: 1.2.752.116.3.1.16.1.5.1
 Title: "Presence of Infectious Agent ICD-10-SE combinations"
 // Description: "Koder i ICD-10 för förekomst av smittämne."
 Description: "Pre-coordinated combination codes representing ICD-10-SE code combinations for presence of infectious agent."
+* ^experimental = false
 * include codes from system SEAlertInformationInfectiousAgentICDCombinationCS
 
 CodeSystem: SEAlertInformationInfectiousAgentICDCombinationCS
@@ -52,14 +62,15 @@ Id: 59851000052108
 Title: "Selection of Infectious Agents, Alert Information"
 // Description: "Snomed CT-koder för smittämnen som används för uppmärksamhetsinformation."
 Description: "Snomed CT codes for infectious agents used for alert information."
+* ^experimental = false
 * include $SCT#432415000 "bärare av meticillinresistent Staphylococcus aureus"
 * include $SCT#431109006 "bärare av vankomycinresistenta enterokocker"
 * include $SCT#762988003 "bärare av ESBL-producerande bakterier"
-* include $SCT#61751000052107 "bärare av ESBL- och karbapenemasproducerande bakterier"
+* include $SESCT#"61751000052107" "bärare av ESBL- och karbapenemasproducerande bakterier"
 
 Mapping:  SEAlertInformation-5-PresenceOfInfectiousAgentFlagToUMI
 Source:   SEAlertInformation-5-PresenceOfInfectiousAgentFlag
-Target:   "UMI"
+Target: "https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/"
 Id:       UMI
 Title:    "UMI"
 Description: "Description..."

@@ -16,6 +16,7 @@ InstanceOf: SEAlertInformationPresenceOfInfectiousAgentObservation
 Description: "An example of the Swedish profile for the observation of incidence 
                 of infectious disease used as reference to the profile SEBaseFlag."
 * status = #final
-* code = http://hl7.org/fhir/sid/icd-10#Z22.3 "Barare av andra specificerade bakteriella sjukdomar"
+* code = SEAlertInformationInfectiousAgentICDCombinationCS#mrsa "MRSA (meticillinresistenta Staphylococcus aureus)"
 * subject = Reference(SEAlertInformationPatientExample) "Patient example"
-
+* effectiveDateTime = "2024-01-15T10:00:00+01:00"
+* performer = Reference(SEAlertInformationExampleOrganization)

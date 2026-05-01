@@ -15,6 +15,12 @@ Description: "SE AlertInformation Patient Profile based on Swedish profile of th
     person informations sets. The example data is based on test persons 
     available in the Inera PU Test environment.
 */
+Instance: SEAlertInformationExampleOrganization
+InstanceOf: Organization
+Description: "Organization used only as Observation.performer in examples."
+* active = true
+* name = "Demo region healthcare (example)"
+
 Instance: SEAlertInformationPatientExample
 InstanceOf: SEAlertInformationPatient
 // Description: "Patientexempel"
@@ -38,4 +44,3 @@ Description: "Patient example"
 * address.city = "Chicago"
 * address.postalCode = "60616"
 * address.country = "US"
-* address.extension[officialAddressType].valueCodeableConcept = $SCT#63401000052101 "utlandsadress"

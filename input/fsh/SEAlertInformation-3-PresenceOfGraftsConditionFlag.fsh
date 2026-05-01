@@ -12,23 +12,24 @@ Description: "Indicates the presence of grafts in the patient, such as transplan
 [Mapping to UMI](StructureDefinition-SEAlertInformation-3-PresenceOfGraftsConditionFlag-mappings.html)"
 * code from SEAlertInformationPresenceOfGraftsConditionVS (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #A3 "Presence of transplant"
+* category = SEAlertInformationCategoryCS#A3 "Presence of transplant"
 // * category = #A3 "Förekomst av transplantat"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
 
-// Instance: SEAlertInformationPresenceOfGraftsConditionFlagExample
-// InstanceOf: SEAlertInformationFlag
-// Description: "An example of the Swedish profile of the Flag resource."
-// * status = #active
-// * code = $SCT#64301000052105 "blodsmitta hos gravid"
-// * extension[flag-detail].valueReference = Reference(SEAlertInformationIncidenceOfInfectiousDiseaseObservationExample) "blodsmitta hos gravid"
-// * subject = Reference(SEAlertInformationPatientExample)
+Instance: SEAlertInformation-3-PresenceOfGraftsConditionFlagExample
+InstanceOf: SEAlertInformation-3-PresenceOfGraftsConditionFlag
+Description: "Minimal example of alert information about presence of a graft or transplant."
+* status = #active
+* code = $SCT#737295003 "transplanterad njure föreligger"
+* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#blodsmitta-hos-gravid "Blodsmitta hos gravid"
+* subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationPresenceOfGraftsConditionVS
 Id: a1.2.752.116.3.1.16.1.3
 Title: "Attention information - Presence of grafts"
 Description: "Attention information - Presence of grafts."
+* ^experimental = false
 * include codes from valueset SEAlertInformationMedicalConditionSnomedVS
 * include codes from valueset SEAlertInformationPresenceOfGraftsConditionOccurrenceSnomedVS
 * include codes from valueset SEAlertInformationPresenceOfGraftsConditionSnomedVS
@@ -36,15 +37,19 @@ Description: "Attention information - Presence of grafts."
 ValueSet: SEAlertInformationPresenceOfGraftsConditionSnomedICDVS
 Id: 1.2.752.116.3.1.16.1.4.1
 Title: "Presence of grafts ICD-10-SE"
-* include $ICD#Z94.0 "Njurtransplanterad"
-* include $ICD#Z94.1 "Hjärttransplanterad"
-* include $ICD#Z94.2 "Lungtransplanterad"
-* include $ICD#Z94.4 "Levertransplanterad"
-* include $ICD#Z94.8 "Andra specificerade transplantationstillstand"
+Description: "ICD-10-SE codes for presence of grafts alert information."
+* ^experimental = false
+* include $ICD10SE#"Z94.0" "Njurtransplanterad"
+* include $ICD10SE#"Z94.1" "Hjärttransplanterad"
+* include $ICD10SE#"Z94.2" "Lungtransplanterad"
+* include $ICD10SE#"Z94.4" "Levertransplanterad"
+* include $ICD10SE#"Z94.8" "Andra specificerade transplantationstillstand"
 
 ValueSet: SEAlertInformationPresenceOfGraftsConditionSnomedVS
 Id: 59861000052106
 Title: "Selection of grafts, attention information"
+Description: "SNOMED CT graft material codes for presence of grafts alert information."
+* ^experimental = false
 * include $SCT#413478009 "allogen benmärgsvätska"
 * include $SCT#413604003 "autolog benmärgsvätska"
 * include $SCT#413679007 "benmärgsvätska"
@@ -53,14 +58,16 @@ Title: "Selection of grafts, attention information"
 * include $SCT#421263007 "transplantatmaterial från pankreas"
 * include $SCT#421525000 "transplantatmaterial från lunga"
 * include $SCT#421751001 "transplantatmaterial från lever"
-* include $SCT#73341000052100 "transplantatmaterial från tarm"
+* include $SESCT#"73341000052100" "transplantatmaterial från tarm"
 
 ValueSet: SEAlertInformationPresenceOfGraftsConditionOccurrenceSnomedVS
 Id: 113471000052100
 Title: "Selection of presence of grafts, attention information"
-* include $SCT#413781000052107 "stamcelltransplantat föreligger"
-* include $SCT#73111000052103 "transplanterad pankreas föreligger"
-* include $SCT#73131000052108 "transplanterad tarm föreligger"
+Description: "SNOMED CT occurrence codes for presence of grafts alert information."
+* ^experimental = false
+* include $SESCT#"413781000052107" "stamcelltransplantat föreligger"
+* include $SESCT#"73111000052103" "transplanterad pankreas föreligger"
+* include $SESCT#"73131000052108" "transplanterad tarm föreligger"
 * include $SCT#737295003 "transplanterad njure föreligger"
 * include $SCT#737296002 "transplanterad lunga föreligger"
 * include $SCT#737297006 "transplanterad lever föreligger"
@@ -68,7 +75,7 @@ Title: "Selection of presence of grafts, attention information"
 
 Mapping:  SEAlertInformation-3-PresenceOfGraftsConditionFlagToUMI
 Source:   SEAlertInformation-3-PresenceOfGraftsConditionFlag
-Target:   "UMI"
+Target: "https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/"
 Id:       UMI
 Title:    "UMI"
 Description: "Description..."

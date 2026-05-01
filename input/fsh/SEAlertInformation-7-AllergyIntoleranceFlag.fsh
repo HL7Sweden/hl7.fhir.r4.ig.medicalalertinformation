@@ -9,22 +9,32 @@ Description: "Indicates a hypersensitivity to a specific chemical, active substa
 [Mapping to UMI](StructureDefinition-SEAlertInformation-7-AllergyIntoleranceFlag-mappings.html)"
 * code from SEAlertInformationChemicalAllergySnomedVS (required)
 * subject only Reference(SEAlertInformationPatient)
-* category = #C1 "Hypersensitivity condition"
+* category = SEAlertInformationCategoryCS#C1 "Hypersensitivity condition"
 // * category = #C1 "Overkanslighetstillstand"
 * extension[flag-detail] 0..0
 * extension[criticalityLevel] 0..0
+
+Instance: SEAlertInformation-7-AllergyIntoleranceFlagExample
+InstanceOf: SEAlertInformation-7-AllergyIntoleranceFlag
+Description: "Minimal example of alert information about a chemical hypersensitivity."
+* status = #active
+* code = $SCT#373568007 "Chlorhexidine"
+* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#anestesiproblem "Anestesiproblem"
+* subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationChemicalAllergySnomedVS
 Id: 59871000052102
 // Title: "Urval kemikalieöverkänsligheter, uppmärksamhetsinformation"
 Title: "Selection of chemical allergies, alert information"
+Description: "SNOMED CT codes for chemical allergy alert information."
+* ^experimental = false
 * include $SCT#373568007 "klorhexidin"
 * include $SCT#111088007 "latex"
 * include $SCT#281000220103 "taurolidin"
 
 Mapping:  SEAlertInformation-7-AllergyIntoleranceFlagToUMI
 Source:   SEAlertInformation-7-AllergyIntoleranceFlag
-Target:   "UMI"
+Target: "https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/"
 Id:       UMI
 Title:    "UMI"
 Description: "Description..."

@@ -3,7 +3,9 @@
 # │  used properties are included. For a list of all supported properties and their functions,     │
 # │  see: https://fshschool.org/docs/sushi/configuration/.                                         │
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
-id: hl7.fhir.r4.ig.medicalalertinformation
+# Use hl7se.* (not hl7.fhir.r4.ig.*): the latter triggers IG Publisher realm rules that require
+# urn:iso:std:iso:3166#R4 on StructureDefinitions, which is not a valid ISO 3166 code for terminology validation.
+id: hl7se.fhir.r4.ig.medicalalertinformation
 canonical: http://hl7.se/fhir/r4/ig/medicalalertinformation
 name: SEMedicalAlertInformationImplementationGuide
 # title: Example Title

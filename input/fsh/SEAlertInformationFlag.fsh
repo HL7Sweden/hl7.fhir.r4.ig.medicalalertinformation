@@ -16,7 +16,7 @@ Description: "Swedish profile of the Flag resource used for alert information ba
     https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/."
 * code 1..1
 * subject only Reference(SEAlertInformationPatient)
-* extension contains http://hl7.org/fhir/StructureDefinition/flag-detail named flag-detail 0..*
+* extension contains http://hl7.org/fhir/StructureDefinition/flag-detail|5.2.0 named flag-detail 0..*
 * extension contains CriticalityLevelExtension named criticalityLevel 0..1
 * extension contains AlertLabelExtension named alertLabel 0..1
 * extension[flag-detail].valueReference only Reference(Resource)
@@ -34,19 +34,20 @@ InstanceOf: SEAlertInformationFlag
 // Description: "Exempel på svensk profil för Flag resource."
 Description: "An example of the Swedish profile of the Flag resource."
 * status = #active
-* code = $ICD#A49.9 "Bakteriell infektion, ospecificerad"
+* code = $ICD10SE#"A49.9" "Bakteriell infektion, ospecificerad"
 * extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#blodsmitta-hos-gravid "Blodsmitta hos gravid"
+* extension[criticalityLevel].valueCodeableConcept = SEAlertInformationCriticalityLevelCS#59031000052109 "Discomforting"
 * extension[flag-detail].valueReference = Reference(SEAlertInformationIncidenceOfInfectiousDiseaseObservationExample) "blodsmitta hos gravid"
 * subject = Reference(SEAlertInformationPatientExample)
 
 //CriticalityLevel
 Extension: CriticalityLevelExtension
-Id: 1
+Id: SECriticalityLevelExtension
 // Title:  "SE AlertInformation Flag Criticality Level Extension"
 Title:  "SE AlertInformation Flag Criticality Level Extension"
 // Description: "En kod som klassificerar allvarlighetsgraden för en överkänslighet."
 Description: "A code classifying the criticality level of an allergy."
-Context: SEAlertInformationFlag
+Context: Flag
 // url, status, purpose, and other metadata could be defined here using caret syntax (omitted)
 * value[x] only CodeableConcept
 * value[x] from SEAlertInformationCriticalityLevelVS (required)
@@ -61,7 +62,7 @@ Extension: AlertLabelExtension
 Id: SEAlertLabelExtension
 Title: "SE Alert Label Extension"
 Description: "Stores the alert label shown to end users, aligned with the national code list published by Socialstyrelsen."
-Context: SEAlertInformationFlag
+Context: Flag
 * value[x] only CodeableConcept
 * value[x] from SEAlertLabelVS (preferred)
 * value[x] ^binding.description = "Use SEAlertLabelVS when possible. If a label is missing, use code.text and extend the CodeSystem in a later release."
@@ -74,6 +75,7 @@ Id: 1
 Title: "Alert Information"
 // Description: "Koder som används för uppmärksamhetsinformation."
 Description: "Codes used for alert information."
+* ^experimental = false
 // url, status, purpose, and other metadata could be defined here using caret syntax (omitted)
 * include codes from valueset SEAlertInformationOtherMedicalConditionVS // Annat medicinskt tillstånd
 * include codes from valueset SEAlertInformationTreatmentVS // Behandling
@@ -99,6 +101,7 @@ Description: "Categorization of alert information."
 * #A "Medical conditions and treatments" // Medicinska tillstånd och behandlingar
 * #A ^definition = "Medical alert information about medical conditions and treatments."
 * #A #A1 "Other medical condition" // Annat medicinskt tillstånd
+* #A #A1 ^definition = "Alert category for a medical condition other than allergy, infection, implant, or graft."
 * #A #A2 "Treatment" // Behandling
 * #A #A3 "Presence of transplant" // Förekomst av transplantat
 * #A #A4 "Presence of implant" // Förekomst av implantat
@@ -122,6 +125,7 @@ Id: SEAlertInformationCategoryVS
 Title: "Type of alert information"
 // Description: "Kategorisering av uppmärksamhetsinformation."
 Description: "Categorization of alert information."
+* ^experimental = false
 // url, status, purpose, and other metadata could be defined here using caret syntax (omitted)
 * include codes from system SEAlertInformationCategoryCS
 
@@ -136,7 +140,9 @@ Description: "Criticality level for allergy."
 * #442452003 "Life-threatening" //Livshotande
 * #442452003 ^definition = "Allergireaktion med livshotande allvarlighetsgrad."
 * #59021000052107 "Harmful" //Skadlig
+* #59021000052107 ^definition = "Harmful criticality level for hypersensitivity documentation."
 * #59031000052109 "Discomforting" //Besvärande
+* #59031000052109 ^definition = "Discomforting criticality level for hypersensitivity documentation."
 
 ValueSet: SEAlertInformationCriticalityLevelVS
 Id: SEAlertInformationCriticalityLevelVS
@@ -144,8 +150,8 @@ Id: SEAlertInformationCriticalityLevelVS
 Title: "Criticality Level"
 // Description: "Allvarlighetsgrad för överkänslighet."
 Description: "Criticality level for allergy."
+* ^experimental = false
 * include codes from system SEAlertInformationCriticalityLevelCS
-
 
 // //Förekomst av implantat
 
@@ -155,17 +161,17 @@ Description: "Criticality level for allergy."
 // Title: "Presence of Implant ICD-10-SE"
 // Description: "Valuesets för förekomsten av implantat enligt ICD-10-SE."
 // Description: "Value set for presence of implant according to ICD-10-SE."
-// * include $ICD#Z95.0 "Förekomst av elektronisk kardiell anordning"
-// * include $ICD#Z95.2 "Förekomst av hjärtklaffprotes av icke-biologiskt material"
-// * include $ICD#Z95.4 "Förekomst av annan typ av hjärtklaffsersättning"
-// * include $ICD#Z98.2 "Tillstånd med förekomst av hjälpmedel för dränage av cerebrospinalvätska"
-// * include $ICD#Z96.0 ""
-// * include $ICD#Z96.2 ""
-// * include $ICD#Z96.8 ""
-// * include $ICD#Z96.8 ""
-// * include $ICD#Z96.8 ""
-// * include $ICD#Z99.4 ""
-// * include $ICD#Z95.0 ""
+// * include $ICD10SE#"Z95.0" "Förekomst av elektronisk kardiell anordning"
+// * include $ICD10SE#"Z95.2" "Förekomst av hjärtklaffprotes av icke-biologiskt material"
+// * include $ICD10SE#"Z95.4" "Förekomst av annan typ av hjärtklaffsersättning"
+// * include $ICD10SE#"Z98.2" "Tillstånd med förekomst av hjälpmedel för dränage av cerebrospinalvätska"
+// * include $ICD10SE#"Z96.0" ""
+// * include $ICD10SE#"Z96.2" ""
+// * include $ICD10SE#"Z96.8" ""
+// * include $ICD10SE#"Z96.8" ""
+// * include $ICD10SE#"Z96.8" ""
+// * include $ICD10SE#"Z99.4" ""
+// * include $ICD10SE#"Z95.0" ""
 
 // ValueSet: SEImplantatSnomedCTVS
 // Id: SEImplantatSnomedCTVS
@@ -208,13 +214,13 @@ Description: "Criticality level for allergy."
 // Title: "Presence of Transplant ICD-10-SE"
 // Description: "Valueset för ICD-10-SE koder relaterade till förekomsten av transplantat."
 // Description: "Value set for ICD-10-SE codes related to presence of transplant."
-// * include $ICD#Z94.8 "Andra specificerade transplantationstillstånd"
-// * include $ICD#Z94.1 "Hjärttransplanterad"
-// * include $ICD#Z94.4 "Levertransplanterad"
-// * include $ICD#Z94.2 "Lungtransplanterad"
-// * include $ICD#Z94.0 "Njurtransplanterad"
-// * include $ICD#113471000052100 "urval förekomst av transplantat, uppmärksamhetsinformation"
-// * include $ICD#59861000052106 "urval transplantat, uppmärksamhetsinformation"
+// * include $ICD10SE#"Z94.8" "Andra specificerade transplantationstillstånd"
+// * include $ICD10SE#"Z94.1" "Hjärttransplanterad"
+// * include $ICD10SE#"Z94.4" "Levertransplanterad"
+// * include $ICD10SE#"Z94.2" "Lungtransplanterad"
+// * include $ICD10SE#"Z94.0" "Njurtransplanterad"
+// * include $ICD10SE#"113471000052100" "urval förekomst av transplantat, uppmärksamhetsinformation"
+// * include $ICD10SE#"59861000052106" "urval transplantat, uppmärksamhetsinformation"
 
 // ValueSet: SEImplantatTransplantSnomedCTVS
 // Id: SEImplantatTransplantSnomedCTVS

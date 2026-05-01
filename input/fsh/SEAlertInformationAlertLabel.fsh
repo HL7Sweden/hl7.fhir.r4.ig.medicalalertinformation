@@ -5,6 +5,7 @@ Description: "Alert labels shown per alert, aligned with the national code list 
 * ^experimental = false
 * ^caseSensitive = true
 * #angioneurotiskt-odem "Angioneurotiskt ödem"
+* #angioneurotiskt-odem ^definition = "User-facing alert label aligned with the national code list (Socialstyrelsen)."
 * #langt-qt-syndrom-lqts "Långt QT-syndrom (LQTS)"
 * #pulmonell-hypertension "Pulmonell hypertension"
 * #addisons-sjukdom "Addisons sjukdom"
@@ -128,4 +129,5 @@ ValueSet: SEAlertLabelVS
 Id: SEAlertLabelVS
 Title: "SE Alert Labels"
 Description: "Alert labels displayed per alert."
+* ^experimental = false
 * include codes from system SEAlertLabelCS
