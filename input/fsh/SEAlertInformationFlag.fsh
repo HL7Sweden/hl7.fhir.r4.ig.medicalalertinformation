@@ -43,10 +43,10 @@ Description: "An example of the Swedish profile of the Flag resource."
 //CriticalityLevel
 Extension: CriticalityLevelExtension
 Id: SECriticalityLevelExtension
-// Title:  "SE AlertInformation Flag Criticality Level Extension"
-Title:  "SE AlertInformation Flag Criticality Level Extension"
+// Title:  "SE AlertInformation Flag Severity level Extension"
+Title:  "SE AlertInformation Flag Severity level Extension"
 // Description: "En kod som klassificerar allvarlighetsgraden för en överkänslighet."
-Description: "A code classifying the criticality level of an allergy."
+Description: "A code classifying the severity level of an allergy."
 Context: Flag
 // url, status, purpose, and other metadata could be defined here using caret syntax (omitted)
 * value[x] only CodeableConcept
@@ -132,23 +132,23 @@ Description: "Categorization of alert information."
 CodeSystem: SEAlertInformationCriticalityLevelCS
 Id: SEAlertInformationCriticalityLevelCS
 // Title: "Allvarlighetsgrad"
-Title: "Criticality Level"
+Title: "Severity level"
 // Description: "Allvarlighetsgrad för överkänslighet"
-Description: "Criticality level for allergy."
+Description: "Severity level for allergy."
 * ^experimental = false
 * ^caseSensitive = true
 * #442452003 "Life-threatening" //Livshotande
 * #442452003 ^definition = "Allergireaktion med livshotande allvarlighetsgrad."
 * #59021000052107 "Harmful" //Skadlig
-* #59021000052107 ^definition = "Harmful criticality level for hypersensitivity documentation."
+* #59021000052107 ^definition = "Harmful severity level for hypersensitivity documentation."
 * #59031000052109 "Discomforting" //Besvärande
-* #59031000052109 ^definition = "Discomforting criticality level for hypersensitivity documentation."
+* #59031000052109 ^definition = "Discomforting severity level for hypersensitivity documentation."
 
 ValueSet: SEAlertInformationCriticalityLevelVS
 Id: SEAlertInformationCriticalityLevelVS
 // Title: "Allvarlighetsgrad"
-Title: "Criticality Level"
+Title: "Severity level"
 // Description: "Allvarlighetsgrad för överkänslighet."
-Description: "Criticality level for allergy."
+Description: "Severity level for allergy."
 * ^experimental = false
 * include codes from system SEAlertInformationCriticalityLevelCS

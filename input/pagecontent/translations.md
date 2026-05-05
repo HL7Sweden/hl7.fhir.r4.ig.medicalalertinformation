@@ -1,6 +1,6 @@
 | Svenska | Engelska | Kommentar |
 |---|---|---|
-| Allvarlighetsgrad | Criticality level | Severity level |
+| Allvarlighetsgrad | Severity level |  |
 | Annat medicinskt tillstånd | Other medical condition |  |
 | Behandling | Treatment |  |
 | Beslut som kan leda till särskild vårdrutin | Decision that can lead to special care routine | Leading bättre engelska? |
