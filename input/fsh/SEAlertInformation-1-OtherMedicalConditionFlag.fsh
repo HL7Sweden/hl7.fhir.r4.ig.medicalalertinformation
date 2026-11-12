@@ -29,7 +29,7 @@ Description: "An example of the Swedish profile of the Flag resource."
 
 ValueSet: SEAlertInformationMedicalConditionSnomedVS
 Id: 59821000052101
-Title: "Subset of medical conditions (attention information)"
+Title: "Other medical condition Snomed CT"
 // Title: "Urval medicinska tillstånd, uppmärksamhetsinformation"
 Description: "SNOMED CT subset for other medical condition alert information."
 * ^experimental = false
