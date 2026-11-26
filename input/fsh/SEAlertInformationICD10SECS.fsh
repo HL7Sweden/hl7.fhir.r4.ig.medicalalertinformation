@@ -1,16 +1,16 @@
-// ICD-10-SE code strings as published in Socialstyrelsen's code list for medical alert information.
+// ICD-10-SE code strings as published in the national code list for medical alert information.
 // Represented in a local CodeSystem so IG validation does not require international ICD-10 for national extensions.
 Alias: $ICD10SE = http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationICD10SECS
 
 CodeSystem: SEAlertInformationICD10SECS
 Id: SEAlertInformationICD10SECS
 Title: "ICD-10-SE (medical alert information)"
-Description: "ICD-10-SE diagnosis and status codes used in this implementation guide, with the same code strings as in Socialstyrelsen's code list."
+Description: "ICD-10-SE diagnosis and status codes used in this implementation guide, with the same code strings as in the national code list for medical alert information."
 * ^experimental = false
 * ^caseSensitive = true
 * ^content = #complete
 * #"T78.3" "Angioneurotiskt ödem"
-* #"T78.3" ^definition = "ICD-10-SE code string as published in Socialstyrelsen's national code list."
+* #"T78.3" ^definition = "ICD-10-SE code string as published in the national code list for medical alert information."
 * #"I49.8E" "Långt QT-syndrom"
 * #"I27.0" "Primär pulmonell hypertoni"
 * #"I27.2" "Annan sekundär pulmonell hypertoni"

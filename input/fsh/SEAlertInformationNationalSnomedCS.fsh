@@ -1,4 +1,4 @@
-// Swedish national SNOMED CT extension codes used in Socialstyrelsen's medical alert information.
+// Swedish national SNOMED CT extension codes used in the national code list for medical alert information.
 // Same numeric code identifiers as in the national edition; represented locally because the
 // international terminology server used in IG validation does not include the Swedish extension module.
 Alias: $SESCT = http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationNationalSnomedCS
@@ -17,7 +17,7 @@ Description: "SNOMED CT identifiers from the Swedish national extension as used 
 * #"41980000052107" "antikoagulantia"
 * #"53891000052101" "trombocytrelaterad sjukdom med ökad blödningstendens"
 * #"203551000052109" "störning av neutrofilfunktion"
-* #"614151000052101" "614151000052101"
+* #"614151000052101" "sällsynt hälsotillstånd som behöver uppmärksammas särskilt"
 * #"73341000052100" "transplantatmaterial från tarm"
 * #"413781000052107" "stamcelltransplantat föreligger"
 * #"73111000052103" "transplanterad pankreas föreligger"
@@ -26,7 +26,7 @@ Description: "SNOMED CT identifiers from the Swedish national extension as used 
 * #"60741000052100" "läkarbeslut finns från brytpunktssamtal"
 * #"61921000052102" "läkarbeslut finns om att inte utföra hjärt-lungräddning"
 * #"61931000052100" "läkarbeslut finns om att avsluta livsuppehållande behandling"
-* #"1304232008" "1304232008"
+* #"1304232008" "deltar i klinisk prövning"
 * #"60761000052104" "avböjt autolog blodtransfusion eller cell saver"
 * #"60781000052105" "hotbild mot patient"
 * #"72821000052105" "mikrospiral, magnetisk metall"

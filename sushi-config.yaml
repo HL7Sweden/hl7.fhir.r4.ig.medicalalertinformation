@@ -34,6 +34,12 @@ publisher:
 #     version: 1.0.0
 dependencies:
   hl7se.fhir.base: 1.1.0
+  # Extensions from the FHIR extensions package (flag-detail, note) in the version published for R4
+  hl7.fhir.uv.extensions.r4: 5.2.0
+
+# The guide is written in English (without this the IG Publisher validated texts as sv-SE)
+parameters:
+  i18n-default-lang: en
 
 #
 #
@@ -51,7 +57,7 @@ dependencies:
 pages:
   index.md:
   flags.md:
-    title: Medical alert signals
+    title: Groups of medical alert information
     # title: Uppmärksamhetssignaler
   use-cases.md:
     title: Use cases
@@ -91,7 +97,7 @@ pages:
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
   Home: index.html
-  Medical alert signals: flags.html
+  Groups of medical alert information: flags.html
   Use cases: use-cases.html
   Terminology: translations.html
   # Uppmärksamhetssignaler: flags.html
@@ -217,6 +223,109 @@ menu:
 # The instanceOptions property is used to configure certain aspects of how SUSHI processes instances.
 # See the individual option definitions below for more detail.
 #
+# Groups on the Artifacts page. The value sets follow the groups and subgroups of the code list for medical alert information.
+groups:
+  BaseProfile:
+    name: "Base profile"
+    description: "The profile that holds the requirements common to all medical alert information. The profiles for the subgroups are derived from it."
+    resources:
+      - StructureDefinition/SEAlertInformationFlag
+  SubgroupProfiles:
+    name: "Profiles for the subgroups of medical alert information"
+    description: "One profile per subgroup of medical alert information, numbered as on the page Groups of medical alert information."
+    resources:
+      - StructureDefinition/SEAlertInformation-1-OtherMedicalConditionFlag
+      - StructureDefinition/SEAlertInformation-2-TreatmentFlag
+      - StructureDefinition/SEAlertInformation-3-PresenceOfTransplantFlag
+      - StructureDefinition/SEAlertInformation-4-PresenceOfImplantFlag
+      - StructureDefinition/SEAlertInformation-5-PresenceOfInfectiousAgentFlag
+      - StructureDefinition/SEAlertInformation-6-PresenceOfInfectiousDiseaseFlag
+      - StructureDefinition/SEAlertInformation-7-HypersensitivityFlag
+      - StructureDefinition/SEAlertInformation-8-InformationSpecialCareRoutineFlag
+      - StructureDefinition/SEAlertInformation-9-DecisionSpecialCareRoutineFlag
+      - StructureDefinition/SEAlertInformation-10-UncategorizedFlag
+  Extensions:
+    name: "Extensions"
+    description: "Extensions used by the profiles in this guide."
+    resources:
+      - StructureDefinition/SEAlertLabelExtension
+      - StructureDefinition/SECriticalityLevelExtension
+      - StructureDefinition/SEVerificationStatusExtension
+  ValueSetsMedicalConditions:
+    name: "Value sets: Medical conditions and treatments"
+    description: "Value sets for other medical condition, treatment, presence of implant and presence of transplant, in the order of the code list for medical alert information."
+    resources:
+      - ValueSet/1.2.752.116.3.1.16.1.1
+      - ValueSet/1.2.752.116.3.1.16.1.1.1
+      - ValueSet/59821000052101
+      - ValueSet/1.2.752.116.3.1.16.1.2
+      - ValueSet/1.2.752.116.3.1.16.1.2.1
+      - ValueSet/59831000052104
+      - ValueSet/1.2.752.116.3.1.16.1.2.2
+      - ValueSet/1.2.752.116.3.1.16.1.3
+      - ValueSet/1.2.752.116.3.1.16.1.3.1
+      - ValueSet/59841000052105
+      - ValueSet/1.2.752.116.3.1.16.1.4
+      - ValueSet/1.2.752.116.3.1.16.1.4.1
+      - ValueSet/113471000052100
+      - ValueSet/59861000052106
+  ValueSetsInfection:
+    name: "Value sets: Infection"
+    description: "Value sets for presence of infectious agent and presence of infectious disease, in the order of the code list for medical alert information."
+    resources:
+      - ValueSet/1.2.752.116.3.1.16.1.5
+      - ValueSet/1.2.752.116.3.1.16.1.5.1
+      - ValueSet/59851000052108
+      - ValueSet/1.2.752.116.3.1.16.1.6
+      - ValueSet/1.2.752.116.3.1.16.1.6.1
+      - ValueSet/60661000052106
+  ValueSetsHypersensitivity:
+    name: "Value sets: Hypersensitivity"
+    description: "Value sets for hypersensitivity, including its subgroups and severity level."
+    resources:
+      - ValueSet/SEAlertInformationHypersensitivityVS
+      - ValueSet/59871000052102
+      - ValueSet/SEAlertInformationHypersensitivitySubgroupVS
+      - ValueSet/SEAlertInformationCriticalityLevelVS
+  ValueSetsSpecialCareRoutine:
+    name: "Value sets: Special care routine"
+    description: "Value sets for information and decisions that can lead to a special care routine."
+    resources:
+      - ValueSet/59881000052100
+      - ValueSet/103491000052103
+  ValueSetsGeneral:
+    name: "Value sets used by all profiles"
+    description: "The groups and subgroups of medical alert information, and the alert labels."
+    resources:
+      - ValueSet/SEAlertInformationCategoryVS
+      - ValueSet/SEAlertLabelVS
+  CodeSystems:
+    name: "Code systems"
+    description: "Code systems defined in this guide."
+    resources:
+      - CodeSystem/SEAlertInformationCategoryCS
+      - CodeSystem/SEAlertLabelCS
+      - CodeSystem/SEAlertInformationCriticalityLevelCS
+      - CodeSystem/SEAlertInformationInfectiousAgentICDCombinationCS
+      - CodeSystem/SEAlertInformationICD10SECS
+      - CodeSystem/SEAlertInformationNationalSnomedCS
+  Examples:
+    name: "Examples"
+    description: "Example instances of the profiles."
+    resources:
+      - Flag/SEAlertInformationFlagExample
+      - Flag/SEAlertInformationOtherMedicalConditionFlagExample
+      - Flag/SEAlertInformationTreatmentFlagExample
+      - Flag/SEAlertInformation-3-PresenceOfTransplantFlagExample
+      - Flag/SEAlertInformation-4-PresenceOfImplantFlagExample
+      - Flag/SEAlertInformation-5-PresenceOfInfectiousAgentFlagExample
+      - Flag/SEAlertInformation-6-PresenceOfInfectiousDiseaseFlagExample
+      - Flag/SEAlertInformation-7-HypersensitivityFlagExample
+      - Flag/SEAlertInformation-8-InformationSpecialCareRoutineFlagExample
+      - Flag/SEAlertInformation-9-DecisionSpecialCareRoutineFlagExample
+      - Flag/SEAlertInformation-10-UncategorizedFlagExample
+      - Patient/PatientExample1
+
 instanceOptions:
   # When set to true, slices must be referred to by name and not only by a numeric index in order to be used
   # in an Instance's assignment rule. All slices appear in the order in which they are specified in FSH rules.

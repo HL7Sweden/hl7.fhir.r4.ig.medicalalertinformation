@@ -7,27 +7,29 @@ Alias: $ATC = http://www.whocc.no/atc
 
 Profile: SEAlertInformation-2-TreatmentFlag
 Parent: SEAlertInformationFlag
-Title: "SE AlertInformation 2 Treatment Flag Profile"
-Description: "Interventions aimed at preventing illness, or preserving or improving the individual’s state of health. This is documented using the **Activity** class in the reference model. Attention information regarding treatment is considered current if there is a documented treatment with status *ongoing*, and no later record indicating that the treatment is no longer ongoing. The treatments that need to be highlighted are defined in the code system *Attention information – Treatment*, and include both pharmacological treatments and other treatments. Pharmacological treatments are listed in the code system as a selection of ATC codes (1.2.752.116.3.1.16.1.2.2). If documentation is made with SNOMED CT, code **416608005** (*drug therapy*) is recorded in the *Treatment* class, while information about which medicinal product is used in the treatment is recorded in the attribute *type* in the class *Active substance* or in the attribute *product-id* in the class *Medicinal product*.
+Title: "SE AlertInformation 2 Treatment Flag"
+Description: "Interventions intended to prevent ill health or to maintain or improve the individual's state of health. This is documented using the activity class in the reference model. Medical alert information about treatment is considered current if there is a documented treatment with the status ongoing, and no later record stating that the treatment is no longer ongoing. The treatments that need to be highlighted are listed in the [value set for treatment](ValueSet-1.2.752.116.3.1.16.1.2.html) and include both drug treatments and other treatments. Drug treatments are given as a selection of ATC codes (1.2.752.116.3.1.16.1.2.2). If SNOMED CT is used, the code 416608005 *drug therapy* is given in the class treatment, while the drug used in the treatment is given in the attribute type in the class active substance, or in the attribute product-id in the class medicinal product.
 
 [Mapping to UMI](StructureDefinition-SEAlertInformation-2-TreatmentFlag-mappings.html)"
 * code from SEAlertInformationTreatmentVS (required)
-* subject only Reference(SEAlertInformationPatient)
-* category = SEAlertInformationCategoryCS#A2 "Treatment"
-// * category = #A2 "Behandling"
+* insert AlertInformationCategory(A, A2)
+* extension contains http://hl7.org/fhir/StructureDefinition/flag-detail|5.2.0 named flag-detail 0..*
 // * extension[flag-detail].valueReference only Reference(Procedure)
 
 Instance: SEAlertInformationTreatmentFlagExample
 InstanceOf: SEAlertInformation-2-TreatmentFlag
+Title: "Example 2: Treatment"
 Description: "An example of the Swedish profile of the treatment Flag resource."
 * status = #active
+* category[mainGroup] = SEAlertInformationCategoryCS#A
+* category[subGroup] = SEAlertInformationCategoryCS#A2
 * code = $SCT#243142003 "BiPAP-behandling"
 * extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#beroende-av-icke-invasiv-ventilation "Beroende av icke-invasiv ventilation"
 * subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationTreatmentATCVS
 Id: 1.2.752.116.3.1.16.1.2.2
-Title: "Treatment – ATC"
+Title: "Treatment ATC"
 //Title: "Behandling ATC"
 Description: "ATC codes for treatment-related alert information."
 * ^experimental = false
@@ -42,7 +44,7 @@ Description: "ATC codes for treatment-related alert information."
 
 ValueSet: SEAlertInformationTreatmentICDVS
 Id: 1.2.752.116.3.1.16.1.2.1
-Title: "Treatment - ICD-10-SE"
+Title: "Treatment ICD-10-SE"
 //Title: "Behandling ICD-10-SE"
 Description: "ICD-10-SE codes for treatment-related alert information."
 * ^experimental = false
@@ -51,7 +53,7 @@ Description: "ICD-10-SE codes for treatment-related alert information."
 
 ValueSet: SEAlertInformationTreatmentSnomedVS
 Id: 59831000052104
-Title: "Subset of treatments, attention information"
+Title: "Treatment Snomed CT"
 //Title: "Urval behandlingar, uppmärksamhetsinformation"
 Description: "SNOMED CT subset for treatment-related alert information."
 * ^experimental = false
@@ -70,10 +72,10 @@ Description: "Combined value set for treatment-related alert information."
 
 Mapping:  SEAlertInformation-2-TreatmentFlagToUMI
 Source:   SEAlertInformation-2-TreatmentFlag
-Target: "https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/"
+Target: "https://www.ehalsomyndigheten.se/verksamhet/ndi/interoperabilitet/uppmarksamhetsinformation/"
 Id:       UMI
 Title:    "UMI"
-Description: "Description..."
+Description: "Mapping from the elements of this profile to the classes and attributes of the information specification for medical alert information (UMI), version 6.1.2. For each element, the mapping gives the UMI class and attribute that the element corresponds to, and how the value is set."
 // * code -> "Implantation(Aktivitet).kod Förekomst av implantat(Observation).värde" 
 * code -> "Uppmärksamhetsinformation Behandling (1.2.752.116.3.1.16.1.2)"
 // TODO: Lägg till mappning till aktiviteterna för att sätta status

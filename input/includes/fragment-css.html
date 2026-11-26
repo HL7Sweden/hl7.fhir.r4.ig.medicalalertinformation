@@ -1,0 +1,15 @@
+<!-- Overrides se-template/includes/fragment-css.html: keep its stylesheet and add styles for this guide. -->
+<link href="assets/css/hl7.se.css" rel="stylesheet"/>
+<style>
+  /* Artifacts table: wrap long ids and descriptions so the table fits the page width.
+     The "body" prefix outranks the template's artifacts-table.css, which is loaded later, and
+     !important outranks the pixel widths that DataTables sets on the columns. */
+  body #artifactsTable { table-layout: fixed; width: 100% !important; }
+  body #artifactsTable col { width: auto !important; }
+  body #artifactsTable thead th:nth-child(1) { width: 22% !important; }
+  body #artifactsTable thead th:nth-child(2) { width: 24% !important; }
+  body #artifactsTable thead th:nth-child(3) { width: 11.5em !important; } /* fits "StructureDefinition" */
+  body #artifactsTable thead th:nth-child(4) { width: auto !important; }
+  body #artifactsTable tbody td { overflow-wrap: break-word; }
+  body #artifactsTable tbody td.artifacts-id { white-space: normal; overflow-wrap: anywhere; }
+</style>

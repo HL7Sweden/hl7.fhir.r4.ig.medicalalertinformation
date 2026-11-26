@@ -1,11 +1,11 @@
 CodeSystem: SEAlertLabelCS
 Id: SEAlertLabelCS
-Title: "SE Alert Labels"
-Description: "Alert labels shown per alert, aligned with the national code list published by Socialstyrelsen."
+Title: "SE Alert Labels code system"
+Description: "The alert labels shown to end users. The code system contains the terms in column A of the code list for medical alert information (version 6.1.2, published by the Swedish eHealth Agency, E-hälsomyndigheten), plus the label Ej strukturanpassad uppmärksamhetsinformation for uncategorized medical alert information."
 * ^experimental = false
 * ^caseSensitive = true
 * #angioneurotiskt-odem "Angioneurotiskt ödem"
-* #angioneurotiskt-odem ^definition = "User-facing alert label aligned with the national code list (Socialstyrelsen)."
+* #angioneurotiskt-odem ^definition = "User-facing alert label from column A of the national code list for medical alert information."
 * #langt-qt-syndrom-lqts "Långt QT-syndrom (LQTS)"
 * #pulmonell-hypertension "Pulmonell hypertension"
 * #addisons-sjukdom "Addisons sjukdom"
@@ -51,7 +51,7 @@ Description: "Alert labels shown per alert, aligned with the national code list 
 * #kongenital-binjurebarkshyperplasi-cah "Kongenital binjurebarkshyperplasi (CAH)"
 * #food-protein-induced-enterocolitis-syndrome-fpies "Food protein induced enterocolitis syndrome (FPIES)"
 * #anlagt-av-graft "Anlagt AV-graft"
-* #behandling-atc-1-2-752-116-3-1-16-1-2-2 "Behandling ATC (1.2.752.116.3.1.16.1.2.2)"
+* #sallsynt-halsotillstand-som-behover-uppmarksammas-sarskilt "Sällsynt hälsotillstånd som behöver uppmärksammas särskilt"
 * #antikoagulantiabehandling "Antikoagulantiabehandling"
 * #warfarinbehandling "Warfarinbehandling"
 * #cytostatikabehandling "Cytostatikabehandling"
@@ -63,7 +63,6 @@ Description: "Alert labels shown per alert, aligned with the national code list 
 * #mekanisk-hjartklaffprotes "Mekanisk hjärtklaffprotes"
 * #intrakraniella-coils "Intrakraniella coils"
 * #intrakraniella-vaskulara-clips "Intrakraniella vaskulära clips"
-* #intrakraniella-magnetiska-metaller "Intrakraniella magnetiska metaller"
 * #shunt-i-centrala-nervsystemet "Shunt i centrala nervsystemet"
 * #trakealstent "Trakealstent"
 * #insulinpump "Insulinpump"
@@ -74,6 +73,7 @@ Description: "Alert labels shown per alert, aligned with the national code list 
 * #frenikusstimulator-diafragmal-pacemaker "Frenikusstimulator/diafragmal pacemaker"
 * #hjartpump-for-vanster-kammare "Hjärtpump för vänster kammare"
 * #pacemakerelektrod "Pacemakerelektrod"
+* #transkutant-benledarimplantat "Transkutant benledarimplantat"
 * #stamcellstransplanterad "Stamcellstransplanterad"
 * #hjarttransplanterad "Hjärttransplanterad"
 * #levertransplanterad "Levertransplanterad"
@@ -114,7 +114,7 @@ Description: "Alert labels shown per alert, aligned with the national code list 
 * #taurolidin "Taurolidin"
 * #hotbild-mot-patient "Hotbild mot patient"
 * #deltagare-i-klinisk-lakemedelsprovning "Deltagare i klinisk läkemedelsprövning"
-* #deltagare-i-klinisk-provning "Deltagare i klinisk prövning"
+* #deltar-i-klinisk-provning "Deltar i klinisk prövning"
 * #patienten-accepterar-ej-blod-eller-plasmatransfusion "Patienten accepterar ej blod- eller plasmatransfusion"
 * #patienten-accepterar-ej-autolog-blodtransfusion-eller-cellsaver "Patienten accepterar ej autolog blodtransfusion eller cellsaver"
 * #lakarbeslut-finns-om-att-inte-utfora-hjart-lungraddning "Läkarbeslut finns om att inte utföra hjärt-lungräddning"
@@ -122,12 +122,11 @@ Description: "Alert labels shown per alert, aligned with the national code list 
 * #lakarbeslut-finns-fran-brytpunktssamtal "Läkarbeslut finns från brytpunktssamtal"
 * #forskrivningsrestriktioner "Förskrivningsrestriktioner"
 * #hanvisning-finns-till-en-specifik-vardenhet "Hänvisning finns till en specifik vårdenhet"
-* #lakemedelsprodukt "Läkemedelsprodukt"
 * #ej-strukturanpassad-uppmarksamhetsinformation "Ej strukturanpassad uppmärksamhetsinformation"
 
 ValueSet: SEAlertLabelVS
 Id: SEAlertLabelVS
 Title: "SE Alert Labels"
-Description: "Alert labels displayed per alert."
+Description: "All alert labels in the code system SE Alert Labels, i.e. the terms in column A of the code list for medical alert information."
 * ^experimental = false
 * include codes from system SEAlertLabelCS

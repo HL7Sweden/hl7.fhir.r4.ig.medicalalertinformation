@@ -3,23 +3,22 @@ Alias: $ICD = http://hl7.org/fhir/sid/icd-10
 
 Profile: SEAlertInformation-5-PresenceOfInfectiousAgentFlag
 Parent: SEAlertInformationFlag
-Title: "SE AlertInformation 5 Presence Of Infectious Agent Flag Profile"
-Description: "Indicates the presence of an infectious agent in the patient, such as bacteria, viruses, or other microorganisms that can cause infection. Attention information regarding an infectious agent is considered current if there is a documented occurrence of the agent in the patient, and no later record indicating that the agent is no longer present. 
+Title: "SE AlertInformation 5 Presence of Infectious Agent Flag"
+Description: "That the patient carries, or does not carry, an infectious agent, i.e. disease-causing organisms that cause infectious diseases, such as viruses, bacteria, fungi and certain parasites. This is documented using the observation class in the reference model. Medical alert information about a specific infectious agent is considered current if there is a documented presence of the infectious agent in the patient, and no later record stating that the patient no longer carries it. The infectious agents that need to be highlighted are listed in the [value set for presence of infectious agent](ValueSet-1.2.752.116.3.1.16.1.5.html).
 
 [Mapping to UMI](StructureDefinition-SEAlertInformation-5-PresenceOfInfectiousAgentFlag-mappings.html)"
 * code from SEAlertInformationPresenceOfInfectiousAgentVS (required)
-* subject only Reference(SEAlertInformationPatient)
-* category = SEAlertInformationCategoryCS#B1 "Presence of infectious agent"
-// * category = #B1 "Forekomst av smittamne"
-* extension[flag-detail] 0..0
-* extension[criticalityLevel] 0..0
+* insert AlertInformationCategory(B, B1)
 
 Instance: SEAlertInformation-5-PresenceOfInfectiousAgentFlagExample
 InstanceOf: SEAlertInformation-5-PresenceOfInfectiousAgentFlag
+Title: "Example 5: Presence of infectious agent"
 Description: "Minimal example of alert information about presence of an infectious agent."
 * status = #active
+* category[mainGroup] = SEAlertInformationCategoryCS#B
+* category[subGroup] = SEAlertInformationCategoryCS#B1
 * code = $SCT#432415000 "MRSA (methicillin resistant Staphylococcus aureus) carrier"
-* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#blodsmitta-hos-gravid "Blodsmitta hos gravid"
+* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#mrsa-meticillinresistenta-staphylococcus-aureus "MRSA (meticillinresistenta Staphylococcus aureus)"
 * subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationPresenceOfInfectiousAgentVS
@@ -35,7 +34,7 @@ Description: "Codes for alert information about presence of infectious agent."
 ValueSet: SEICDPresenceOfInfectiousAgentVS
 Id: 1.2.752.116.3.1.16.1.5.1
 // Title: "Förekomst av smittämne ICD-10-SE"
-Title: "Presence of Infectious Agent ICD-10-SE combinations"
+Title: "Presence of Infectious Agent ICD-10-SE"
 // Description: "Koder i ICD-10 för förekomst av smittämne."
 Description: "Pre-coordinated combination codes representing ICD-10-SE code combinations for presence of infectious agent."
 * ^experimental = false
@@ -59,7 +58,7 @@ Description: "Local pre-coordinated codes for national ICD-10-SE combinations us
 ValueSet: SESCTInfectiousAgentAlertInformationVS
 Id: 59851000052108
 // Title: "Urval smittämnen, uppmärksamhetsinformation"
-Title: "Selection of Infectious Agents, Alert Information"
+Title: "Presence of Infectious Agent Snomed CT"
 // Description: "Snomed CT-koder för smittämnen som används för uppmärksamhetsinformation."
 Description: "Snomed CT codes for infectious agents used for alert information."
 * ^experimental = false
@@ -70,10 +69,10 @@ Description: "Snomed CT codes for infectious agents used for alert information."
 
 Mapping:  SEAlertInformation-5-PresenceOfInfectiousAgentFlagToUMI
 Source:   SEAlertInformation-5-PresenceOfInfectiousAgentFlag
-Target: "https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/"
+Target: "https://www.ehalsomyndigheten.se/verksamhet/ndi/interoperabilitet/uppmarksamhetsinformation/"
 Id:       UMI
 Title:    "UMI"
-Description: "Description..."
+Description: "Mapping from the elements of this profile to the classes and attributes of the information specification for medical alert information (UMI), version 6.1.2. For each element, the mapping gives the UMI class and attribute that the element corresponds to, and how the value is set."
 * code -> "Uppmärksamhetsinformation Förekomst av smittämne (1.2.752.116.3.1.16.1.5)"
 * status -> "Förekomst av smittämne(Observation).negation. Om negation = true → inactive, om negation = false → active."
 * period.start -> "Förekomst av smittämne(Observation).tid" 
