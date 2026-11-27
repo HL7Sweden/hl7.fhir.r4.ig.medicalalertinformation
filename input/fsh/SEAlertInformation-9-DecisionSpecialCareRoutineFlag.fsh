@@ -12,7 +12,7 @@ Description: "For example, a decision made during an end-of-life care conversati
 * code from SEAlertInformationDecisionSpecialCareRoutineSnomedCT (required)
 * insert AlertInformationCategory(D, D2)
 // The note extension is defined for R5 and published for R4 in the FHIR extensions package
-* extension contains http://hl7.org/fhir/StructureDefinition/note|5.2.0 named note 0..1
+* extension contains http://hl7.org/fhir/StructureDefinition/note|5.4.1 named note 0..1
 * extension[note] ^short = "Description of the decision"
 * extension[note] ^definition = "Description of the decision that can lead to a special care routine (Beslut som kan leda till särskild vårdrutin.beskrivning)."
 

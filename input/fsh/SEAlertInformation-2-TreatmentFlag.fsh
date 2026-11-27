@@ -13,7 +13,7 @@ Description: "Interventions intended to prevent ill health or to maintain or imp
 [Mapping to UMI](StructureDefinition-SEAlertInformation-2-TreatmentFlag-mappings.html)"
 * code from SEAlertInformationTreatmentVS (required)
 * insert AlertInformationCategory(A, A2)
-* extension contains http://hl7.org/fhir/StructureDefinition/flag-detail|5.2.0 named flag-detail 0..*
+* extension contains http://hl7.org/fhir/StructureDefinition/flag-detail|5.4.1 named flag-detail 0..*
 // * extension[flag-detail].valueReference only Reference(Procedure)
 
 Instance: SEAlertInformationTreatmentFlagExample
