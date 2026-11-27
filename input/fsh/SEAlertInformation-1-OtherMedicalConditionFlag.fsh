@@ -1,17 +1,12 @@
-// This is a simple example of a FSH file.
-// This file can be renamed, and additional FSH files can be added.
-// SUSHI will look for definitions in any file using the .fsh ending.
 Alias: $SCT = http://snomed.info/sct
 Alias: $ICD = http://hl7.org/fhir/sid/icd-10
 
 Profile: SEAlertInformation-1-OtherMedicalConditionFlag
 Parent: SEAlertInformationFlag
 Title: "SE AlertInformation 1 Other Medical Condition Flag"
-// Description: "Swedish profile of the Flag resource used for alert information about other medical conditions."
-Description: "A medical condition, other than hypersensitivity, presence of infectious disease, presence of infectious agent, presence of implant or presence of transplant, that the patient has or does not have. This is documented using the observation class in the reference model. Medical alert information about another medical condition is considered current if there is a documented occurrence of the condition in the patient, and no later record stating that the patient no longer has the condition. The medical conditions that need to be highlighted are listed in the [value set for other medical condition](ValueSet-1.2.752.116.3.1.16.1.1.html).
+Description: "A medical condition, other than hypersensitivity, presence of infectious disease, presence of infectious agent, presence of implant or presence of transplant, that the patient has or does not have. This is documented using the observation class in the reference model. Medical medical alert information about another medical condition is considered current if there is a documented occurrence of the condition in the patient, and no later record stating that the patient no longer has the condition. The medical conditions that need to be highlighted are listed in the [value set for other medical condition](ValueSet-1.2.752.116.3.1.16.1.1.html).
 
 [Mapping to UMI](StructureDefinition-SEAlertInformation-1-OtherMedicalConditionFlag-mappings.html)"
-// * text.div = "markdown:SEAlertInformation-1-OtherMedicalConditionFlag-intro.md"
 * code from SEAlertInformationOtherMedicalConditionVS (required)
 * insert AlertInformationCategory(A, A1)
 
@@ -23,14 +18,13 @@ Description: "An example of the Swedish profile of the Flag resource."
 * category[mainGroup] = SEAlertInformationCategoryCS#A
 * category[subGroup] = SEAlertInformationCategoryCS#A1
 * code = $ICD10SE#"T78.3" "Angioneurotiskt ödem"
-* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#angioneurotiskt-odem "Angioneurotiskt ödem"
+* code.text = "Angioneurotiskt ödem"
 * subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationMedicalConditionSnomedVS
 Id: 59821000052101
 Title: "Other medical condition Snomed CT"
-// Title: "Urval medicinska tillstånd, uppmärksamhetsinformation"
-Description: "SNOMED CT subset for other medical condition alert information."
+Description: "SNOMED CT subset for medical alert information about other medical condition."
 * ^experimental = false
 * include $SCT#41291007 "angioödem"
 * include $SCT#9651007 "långt QT-syndrom"
@@ -84,8 +78,7 @@ Description: "SNOMED CT subset for other medical condition alert information."
 ValueSet: SEAlertInformationOtherMedicalConditionICDVS
 Id: 1.2.752.116.3.1.16.1.1.1
 Title: "Other medical condition ICD-10-SE"
-//Title: "Annat medicinskt tillstånd ICD-10-SE"
-Description: "ICD-10-SE codes for other medical condition alert information."
+Description: "ICD-10-SE codes for medical alert information about other medical condition."
 * ^experimental = false
 * include $ICD10SE#"T78.3" "Angioneurotiskt ödem"
 * include $ICD10SE#"I49.8E" "Långt QT-syndrom"
@@ -154,31 +147,18 @@ Description: "ICD-10-SE codes for other medical condition alert information."
 
 ValueSet: SEAlertInformationOtherMedicalConditionVS
 Id: 1.2.752.116.3.1.16.1.1
-Title: "Attention information – Other medical condition"
-//Title: "Uppmärksamhetsinformation Annat medicinskt tillstånd"
-Description: "Uppmärksamhetsinformation för annat medicinskt tillstånd."
+Title: "Alert Information – Other Medical Condition"
+Description: "Codes for medical alert information about other medical condition (Uppmärksamhetsinformation Annat medicinskt tillstånd): the ICD-10-SE and SNOMED CT subsets."
 * ^experimental = false
 * include codes from valueset SEAlertInformationOtherMedicalConditionICDVS
 * include codes from valueset SEAlertInformationMedicalConditionSnomedVS
-
-//
-// Introduktionstext till profilen SEAlertInformation-1-OtherMedicalConditionFlag
-//
-// Denna profil används för att dokumentera och uppmärksamma andra medicinska tillstånd hos en patient som kan vara av betydelse för vård och behandling, men som inte omfattas av övriga specifika uppmärksamhetssignaler såsom överkänslighet, smittsam sjukdom, smittämne, implantat eller transplantat. Exempel på sådana tillstånd kan vara ärftliga koagulationsrubbningar, ämnesomsättningssjukdomar, immunbristtillstånd eller andra sällsynta diagnoser. Syftet är att säkerställa att viktig medicinsk information om patienten är lättillgänglig och kan beaktas i alla vårdsituationer.
-//
-//!include SEAlertInformation-1-OtherMedicalConditionFlag-intro.md
-
 
 Mapping:  SEAlertInformation-1-OtherMedicalConditionFlagToUMI
 Source:   SEAlertInformation-1-OtherMedicalConditionFlag
 Target: "https://www.ehalsomyndigheten.se/verksamhet/ndi/interoperabilitet/uppmarksamhetsinformation/"
 Id:       UMI
 Title:    "UMI"
-Description: "Mapping from the elements of this profile to the classes and attributes of the information specification for medical alert information (UMI), version 6.1.2. For each element, the mapping gives the UMI class and attribute that the element corresponds to, and how the value is set."
-// * code -> "Implantation(Aktivitet).kod Förekomst av implantat(Observation).värde" 
-* code -> "Uppmärksamhetsinformation Annat medicinskt tillstånd (1.2.752.116.3.1.16.1.1)"
-// TODO: Lägg till mappning till aktiviteterna för att sätta status
-* status -> "Annat medicinskt tillstånd(Observation).negation. Om negation = true → inactive, om negation = false → active."
-* period.start -> "Annat medicinskt tillstånd(Observation).tid"
-* subject -> "Patient"
-* category -> "Typ av uppmärksamhetsinformation (huvudgrupp)"
+Description: "Mapping from the elements of this profile to the classes and attributes of the information specification for medical alert information (UMI), version 6.1.2. The mappings common to all medical alert information (subject, category) are given in the profile SE AlertInformation Flag."
+* code -> "Annat medicinskt tillstånd(Observation).värde" "A code from the value set Uppmärksamhetsinformation Annat medicinskt tillstånd (1.2.752.116.3.1.16.1.1)."
+* status -> "Annat medicinskt tillstånd(Observation).status, negation" "Flag.status is set as follows: observed presence (observerad förekomst) and negation = false → active; observed presence and negation = true → inactive. entered-in-error is not used."
+* period -> "Annat medicinskt tillstånd(Observation).tid"

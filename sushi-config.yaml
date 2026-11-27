@@ -57,14 +57,11 @@ parameters:
 pages:
   index.md:
   flags.md:
-    title: Groups of medical alert information
-    # title: Uppmärksamhetssignaler
+    title: Mapping from UMI
   use-cases.md:
     title: Use cases
-    # title: Användningsfall
   translations.md:
     title: Terminology and translations
-    # title: Terminologi och översättningar
 #   index.md:
 #     title: Example Home
 #   implementation.xml:
@@ -97,12 +94,9 @@ pages:
 # ╰────────────────────────────────────────────────────────────────────────────────────────────────╯
 menu:
   Home: index.html
-  Groups of medical alert information: flags.html
+  Mapping from UMI: flags.html
   Use cases: use-cases.html
   Terminology: translations.html
-  # Uppmärksamhetssignaler: flags.html
-  # Användningsfall: use-cases.html
-  # Terminologi: translations.html
   Artifacts: artifacts.html
 
 # ╭───────────────────────────Less Common Implementation Guide Properties──────────────────────────╮
@@ -232,7 +226,7 @@ groups:
       - StructureDefinition/SEAlertInformationFlag
   SubgroupProfiles:
     name: "Profiles for the subgroups of medical alert information"
-    description: "One profile per subgroup of medical alert information, numbered as on the page Groups of medical alert information."
+    description: "One profile per subgroup of medical alert information, numbered as on the page Mapping from UMI."
     resources:
       - StructureDefinition/SEAlertInformation-1-OtherMedicalConditionFlag
       - StructureDefinition/SEAlertInformation-2-TreatmentFlag
@@ -246,11 +240,11 @@ groups:
       - StructureDefinition/SEAlertInformation-10-UncategorizedFlag
   Extensions:
     name: "Extensions"
-    description: "Extensions used by the profiles in this guide."
+    description: "Extensions defined in this guide. The base profile also uses the extensions note (comment), flag-priority and flag-detail from the FHIR extensions package."
     resources:
-      - StructureDefinition/SEAlertLabelExtension
-      - StructureDefinition/SECriticalityLevelExtension
-      - StructureDefinition/SEVerificationStatusExtension
+      - StructureDefinition/SeverityLevel
+      - StructureDefinition/VerificationStatus
+      - StructureDefinition/DecisionDescription
   ValueSetsMedicalConditions:
     name: "Value sets: Medical conditions and treatments"
     description: "Value sets for other medical condition, treatment, presence of implant and presence of transplant, in the order of the code list for medical alert information."
@@ -274,19 +268,19 @@ groups:
     description: "Value sets for presence of infectious agent and presence of infectious disease, in the order of the code list for medical alert information."
     resources:
       - ValueSet/1.2.752.116.3.1.16.1.5
-      - ValueSet/1.2.752.116.3.1.16.1.5.1
       - ValueSet/59851000052108
       - ValueSet/1.2.752.116.3.1.16.1.6
       - ValueSet/1.2.752.116.3.1.16.1.6.1
       - ValueSet/60661000052106
   ValueSetsHypersensitivity:
     name: "Value sets: Hypersensitivity"
-    description: "Value sets for hypersensitivity, including its subgroups and severity level."
+    description: "Value sets for hypersensitivity, including its subgroups, severity level and verification status."
     resources:
       - ValueSet/SEAlertInformationHypersensitivityVS
       - ValueSet/59871000052102
       - ValueSet/SEAlertInformationHypersensitivitySubgroupVS
-      - ValueSet/SEAlertInformationCriticalityLevelVS
+      - ValueSet/SEAlertInformationSeverityLevelVS
+      - ValueSet/SEAlertInformationVerificationStatusVS
   ValueSetsSpecialCareRoutine:
     name: "Value sets: Special care routine"
     description: "Value sets for information and decisions that can lead to a special care routine."
@@ -295,20 +289,24 @@ groups:
       - ValueSet/103491000052103
   ValueSetsGeneral:
     name: "Value sets used by all profiles"
-    description: "The groups and subgroups of medical alert information, and the alert labels."
+    description: "The main groups and subgroups of medical alert information."
     resources:
       - ValueSet/SEAlertInformationCategoryVS
-      - ValueSet/SEAlertLabelVS
+      - ValueSet/SEAlertInformationMainGroupVS
+      - ValueSet/SEAlertInformationSubgroupVS
   CodeSystems:
     name: "Code systems"
-    description: "Code systems defined in this guide."
+    description: "Code systems defined in this guide. The codes are defined in the code systems; the profiles and extensions bind to the value sets."
     resources:
       - CodeSystem/SEAlertInformationCategoryCS
-      - CodeSystem/SEAlertLabelCS
-      - CodeSystem/SEAlertInformationCriticalityLevelCS
-      - CodeSystem/SEAlertInformationInfectiousAgentICDCombinationCS
+      - CodeSystem/SEAlertInformationSeverityLevelCS
       - CodeSystem/SEAlertInformationICD10SECS
       - CodeSystem/SEAlertInformationNationalSnomedCS
+  ConceptMaps:
+    name: "Concept maps"
+    description: "Concept maps defined in this guide."
+    resources:
+      - ConceptMap/SEAlertInformationInfectiousAgentSnomedToICD10SE
   Examples:
     name: "Examples"
     description: "Example instances of the profiles."

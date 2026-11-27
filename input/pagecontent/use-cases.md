@@ -1,8 +1,5 @@
 This section describes typical situations where **medical alert information** is recorded, shared, and consumed in the Swedish healthcare context. The Implementation Guide constrains the FHIR `Flag` resource for representing medical alert information, with optional references to underlying source artifacts when needed for context.
 
-<!--
-This section describes typical situations where Uppmärksamhetsinformation (UMI) is recorded, shared, and consumed in the Swedish healthcare context.
--->
 
 ### UC-1: Access and presentation in cross-organisational services (e.g., NPÖ)
 

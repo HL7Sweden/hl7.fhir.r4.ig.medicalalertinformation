@@ -12,4 +12,6 @@
   body #artifactsTable thead th:nth-child(4) { width: auto !important; }
   body #artifactsTable tbody td { overflow-wrap: break-word; }
   body #artifactsTable tbody td.artifacts-id { white-space: normal; overflow-wrap: anywhere; }
+  /* No section numbers in front of the headings (the template adds them with CSS counters in project.css). */
+  body h2::before, body h3::before, body h4::before, body h5::before, body h6::before { content: none !important; }
 </style>
