@@ -8,7 +8,7 @@ InstanceOf: SEBasePatient
 Title: "Example: Patient"
 // Description: "Patientexempel"
 Description: "Patient example"
-* meta.security[0] = #DEMO
+* meta.security[0] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST "test health data"
 * meta.security[1] = SecurityLabelCS#sekretessmarkering
 * id = "PatientExample1"
 * identifier[personnummer].value = "195009072553"
@@ -23,7 +23,7 @@ Description: "Patient example"
 * gender = #male
 * maritalStatus = SEBaseMaritalStatusCS#RP "Registrerad partner"
 * birthDate = "1950-09-07"
-* address.line = "2120 S Michigan Ave"
-* address.city = "Chicago"
-* address.postalCode = "60616"
-* address.country = "US"
+* address.line = "Storgatan 1"
+* address.city = "Stockholm"
+* address.postalCode = "11122"
+* address.country = "SE"

@@ -1,6 +1,3 @@
-// This is a simple example of a FSH file.
-// This file can be renamed, and additional FSH files can be added.
-// SUSHI will look for definitions in any file using the .fsh ending.
 Alias: $SCT = http://snomed.info/sct
 Alias: $ICD = http://hl7.org/fhir/sid/icd-10
 
@@ -16,18 +13,18 @@ Description: "That the patient has, or does not have, a transplant, i.e. surgica
 Instance: SEAlertInformation-3-PresenceOfTransplantFlagExample
 InstanceOf: SEAlertInformation-3-PresenceOfTransplantFlag
 Title: "Example 3: Presence of transplant"
-Description: "Minimal example of alert information about presence of a transplant."
+Description: "Minimal example of medical alert information about presence of a transplant."
 * status = #active
 * category[mainGroup] = SEAlertInformationCategoryCS#A
 * category[subGroup] = SEAlertInformationCategoryCS#A3
 * code = $SCT#737295003 "transplanterad njure föreligger"
-* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#njurtransplanterad "Njurtransplanterad"
+* code.text = "Njurtransplanterad"
 * subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationPresenceOfTransplantVS
 Id: 1.2.752.116.3.1.16.1.4
-Title: "Attention information - Presence of transplant"
-Description: "Codes for alert information about presence of transplant."
+Title: "Alert Information – Presence of Transplant"
+Description: "Codes for medical alert information about presence of transplant (Uppmärksamhetsinformation Förekomst av transplantat): the ICD-10-SE and SNOMED CT subsets."
 * ^experimental = false
 * include codes from valueset SEAlertInformationPresenceOfTransplantICDVS
 * include codes from valueset SEAlertInformationPresenceOfTransplantSnomedVS
@@ -36,7 +33,7 @@ Description: "Codes for alert information about presence of transplant."
 ValueSet: SEAlertInformationPresenceOfTransplantICDVS
 Id: 1.2.752.116.3.1.16.1.4.1
 Title: "Presence of Transplant ICD-10-SE"
-Description: "ICD-10-SE codes for alert information about presence of transplant."
+Description: "ICD-10-SE codes for medical alert information about presence of transplant."
 * ^experimental = false
 * include $ICD10SE#"Z94.0" "Njurtransplanterad"
 * include $ICD10SE#"Z94.1" "Hjärttransplanterad"
@@ -47,7 +44,7 @@ Description: "ICD-10-SE codes for alert information about presence of transplant
 ValueSet: SEAlertInformationTransplantSnomedVS
 Id: 59861000052106
 Title: "Transplants Snomed CT"
-Description: "SNOMED CT codes for transplant material, used for alert information about presence of transplant."
+Description: "SNOMED CT codes for transplant material, used for medical alert information about presence of transplant."
 * ^experimental = false
 * include $SCT#413478009 "allogen benmärgsvätska"
 * include $SCT#413604003 "autolog benmärgsvätska"
@@ -62,7 +59,7 @@ Description: "SNOMED CT codes for transplant material, used for alert informatio
 ValueSet: SEAlertInformationPresenceOfTransplantSnomedVS
 Id: 113471000052100
 Title: "Presence of Transplant Snomed CT"
-Description: "SNOMED CT codes for alert information about presence of transplant."
+Description: "SNOMED CT codes for medical alert information about presence of transplant."
 * ^experimental = false
 * include $SESCT#"413781000052107" "stamcelltransplantat föreligger"
 * include $SESCT#"73111000052103" "transplanterad pankreas föreligger"
@@ -77,13 +74,7 @@ Source:   SEAlertInformation-3-PresenceOfTransplantFlag
 Target: "https://www.ehalsomyndigheten.se/verksamhet/ndi/interoperabilitet/uppmarksamhetsinformation/"
 Id:       UMI
 Title:    "UMI"
-Description: "Mapping from the elements of this profile to the classes and attributes of the information specification for medical alert information (UMI), version 6.1.2. For each element, the mapping gives the UMI class and attribute that the element corresponds to, and how the value is set."
-// * code -> "Implantation(Aktivitet).kod Förekomst av implantat(Observation).värde" 
-* code -> "Uppmärksamhetsinformation Förekomst av transplantat (1.2.752.116.3.1.16.1.4)"
-// TODO: Lägg till mappning till aktiviteterna för att sätta status
-* status -> "Transplantation(Aktivitet) Avlägsnande av transplantat(Aktivitet) Förekomst av transplantat(Observation)" "Flag.status ska sättas enligt följande: observerad förekomst & negation = falskt -> active observerad förekomst & negation = sant -> inactive. entered-in-error används inte."
-* period.start -> "Transplantation(Aktivitet).tid Förekomst av transplantat(Observation).tid" 
-* period.end -> "Avlägsnande av transplantat(Aktivitet).tid.sluttid Förekomst av transplantat(Observation).tid" 
-* subject -> "Patient"
-* category -> "Typ av uppmärksamhetsinformation (huvudgrupp)"
-
+Description: "Mapping from the elements of this profile to the classes and attributes of the information specification for medical alert information (UMI), version 6.1.2. The mappings common to all medical alert information (subject, category) are given in the profile SE AlertInformation Flag."
+* code -> "Förekomst av transplantat(Observation).värde" "A code from the value set Uppmärksamhetsinformation Förekomst av transplantat (1.2.752.116.3.1.16.1.4). The class Transplantation is not mapped, since documentation of a transplantation implies presence of transplant. Kroppsstruktur is not handled."
+* status -> "Förekomst av transplantat(Observation).status, negation" "Flag.status is set as follows: observed presence (observerad förekomst) and negation = false → active; observed presence and negation = true → inactive. entered-in-error is not used."
+* period -> "Förekomst av transplantat(Observation).tid"

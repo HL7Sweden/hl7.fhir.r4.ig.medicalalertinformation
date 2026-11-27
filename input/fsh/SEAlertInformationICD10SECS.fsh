@@ -5,7 +5,7 @@ Alias: $ICD10SE = http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SE
 CodeSystem: SEAlertInformationICD10SECS
 Id: SEAlertInformationICD10SECS
 Title: "ICD-10-SE (medical alert information)"
-Description: "ICD-10-SE diagnosis and status codes used in this implementation guide, with the same code strings as in the national code list for medical alert information."
+Description: "ICD-10-SE diagnosis and status codes used in this implementation guide, with the same code strings as in the national code list for medical alert information. The codes are part of ICD-10-SE; they are represented in this code system so that the guide can be validated without access to ICD-10-SE. The value sets for the subgroups contain the subsets of these codes that are used for medical alert information."
 * ^experimental = false
 * ^caseSensitive = true
 * ^content = #complete
@@ -90,4 +90,25 @@ Description: "ICD-10-SE diagnosis and status codes used in this implementation g
 * #"Z79.89" "Långtidsanvändning av andra specificerade läkemedel"
 * #"Z92.1" "Långtidsanvändning (och pågående användning) av blodförtunnande medel i den egna sjukhistorien"
 * #"Z99.2" "Beroende av njurdialys"
-* #"A49.9" "Bakteriell infektion, ospecificerad"
+// ICD-10-SE codes in the combinations for presence of infectious agent (Förekomst av smittämne ICD-10-SE, 1.2.752.116.3.1.16.1.5.1).
+// Used as targets in the concept map SEAlertInformationInfectiousAgentSnomedToICD10SE. Displays to be added from ICD-10-SE.
+* #"Z22.3C"
+* #"B95.6"
+* #"U82.1"
+* #"Z22.3W"
+* #"B95.2"
+* #"U83.0"
+* #"Z22.1"
+* #"B96.1"
+* #"U82.2"
+* #"U82.5"
+* #"Z22.3C" ^definition = "ICD-10-SE code in the combination for MRSA in the code list for medical alert information."
+* #"B95.6" ^definition = "ICD-10-SE code in the combination for MRSA in the code list for medical alert information."
+* #"U82.1" ^definition = "ICD-10-SE code in the combination for MRSA in the code list for medical alert information."
+* #"Z22.3W" ^definition = "ICD-10-SE code in the combination for VRE in the code list for medical alert information."
+* #"B95.2" ^definition = "ICD-10-SE code in the combination for VRE in the code list for medical alert information."
+* #"U83.0" ^definition = "ICD-10-SE code in the combination for VRE in the code list for medical alert information."
+* #"Z22.1" ^definition = "ICD-10-SE code in the combinations for ESBL and ESBL CARBA in the code list for medical alert information."
+* #"B96.1" ^definition = "ICD-10-SE code in the combinations for ESBL and ESBL CARBA in the code list for medical alert information."
+* #"U82.2" ^definition = "ICD-10-SE code in the combination for ESBL in the code list for medical alert information."
+* #"U82.5" ^definition = "ICD-10-SE code in the combination for ESBL CARBA in the code list for medical alert information."

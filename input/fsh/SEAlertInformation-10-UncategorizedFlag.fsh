@@ -3,6 +3,8 @@ Parent: SEAlertInformationFlag
 Title: "SE AlertInformation 10 Uncategorized Flag"
 Description: "Uncategorized medical alert information refers here to historically recorded medical alert information that does not meet the current requirements for information structure, as well as medical alert information that is not nationally agreed. This is documented using the document class in the reference model.
 
+Since the information is not structured, Flag.code has no binding. The information is given as text in code.text, with a code in code.coding only if one is available.
+
 [Mapping to UMI](StructureDefinition-SEAlertInformation-10-UncategorizedFlag-mappings.html)"
 * insert AlertInformationCategory(E, E1)
 
@@ -13,8 +15,7 @@ Description: "Minimal example of historically recorded unstructured medical aler
 * status = #active
 * category[mainGroup] = SEAlertInformationCategoryCS#E
 * category[subGroup] = SEAlertInformationCategoryCS#E1
-* code = $ICD10SE#"A49.9" "Bakteriell infektion, ospecificerad"
-* extension[alertLabel].valueCodeableConcept = SEAlertLabelCS#ej-strukturanpassad-uppmarksamhetsinformation "Ej strukturanpassad uppmärksamhetsinformation"
+* code.text = "Patienten har en historiskt angiven uppgift om överkänslighet mot jordnötter."
 * subject = Reference(SEAlertInformationPatientExample)
 
 Mapping:  SEAlertInformation-10-UncategorizedFlagToUMI
@@ -22,8 +23,6 @@ Source:   SEAlertInformation-10-UncategorizedFlag
 Target: "https://www.ehalsomyndigheten.se/verksamhet/ndi/interoperabilitet/uppmarksamhetsinformation/"
 Id:       UMI
 Title:    "UMI"
-Description: "Mapping from the elements of this profile to the classes and attributes of the information specification for medical alert information (UMI), version 6.1.2. For each element, the mapping gives the UMI class and attribute that the element corresponds to, and how the value is set."
-* code -> "Typ av uppmärksamhetsinformation (huvudgrupp).Ej strukturanpassad uppmärksamhetsinformation"
-* period.start -> "Ej strukturanpassad uppmärksamhetsinformation.dokumentationstidpunkt" 
-* subject -> "Patient"
-* category -> "Typ av uppmärksamhetsinformation (huvudgrupp)"
+Description: "Mapping from the elements of this profile to the classes and attributes of the information specification for medical alert information (UMI), version 6.1.2. The mappings common to all medical alert information (subject, category) are given in the profile SE AlertInformation Flag."
+* code.text -> "Ej strukturanpassad uppmärksamhetsinformation(Dokument)" "The uncategorized medical alert information as text."
+* period.start -> "Ej strukturanpassad uppmärksamhetsinformation(Dokument).dokumentationstidpunkt"

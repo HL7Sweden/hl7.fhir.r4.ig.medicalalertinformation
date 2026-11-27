@@ -1,97 +1,206 @@
 <style>
-    table {
-    table-layout: fixed;
-    width: 100%;
-    }
-    th:nth-child(1), td:nth-child(1) {
-    width: 18%;
-    }
-    th:nth-child(2), td:nth-child(2) {
-    width: 32%;
-    }
-    th:nth-child(3), td:nth-child(3) {
-    width: 50%;
-    }
+    table.umi { table-layout: fixed; width: 100%; }
+    table.umi th:nth-child(1), table.umi td:nth-child(1) { width: 34%; }
+    table.umi th:nth-child(2), table.umi td:nth-child(2) { width: 24%; }
+    table.umi th:nth-child(3), table.umi td:nth-child(3) { width: 42%; }
 </style>
 
-Medical alert information is used to quickly and clearly highlight important conditions, treatments, or risks in a patient that may affect care and management. Below, the different groups and subgroups of medical alert information, as defined in the eHealth Agency's (E-hälsomyndigheten) national specification for medical alert information, are presented together with the profile used for each subgroup.
+This page describes how the information specification for medical alert information (UMI), version 6.1.2, published by the Swedish eHealth Agency (E-hälsomyndigheten), is represented in the profiles of this guide: which profile is used for each group and subgroup of medical alert information, and how the classes and attributes of the specification map to the elements of the profile. The descriptions of the groups and subgroups are found on the profile pages. The terms follow [Terminology and translations](translations.html).
 
-The descriptions are translations of the class descriptions in the information specification for medical alert information, version 6.1.2, made by the HL7 Sweden working group for medical alert information. The terms follow [Terminology and translations](translations.html).
+### Overview of the profiles
 
-Each profile has a mapping to UMI, shown under *Mappings* on the profile page and linked from its description. For each element in the profile, the mapping gives the class and attribute in the information specification for medical alert information that the element corresponds to, and how the value is set. The *Mappings* tab also shows mappings to the HL7 RIM and to the FiveWs pattern. Those are inherited automatically from the FHIR resource Flag and are not specific to this guide.
+All profiles are derived from the base profile [SE AlertInformation Flag](StructureDefinition-SEAlertInformationFlag.html), which holds the requirements that are common to all medical alert information. Each of the profiles 1–10 corresponds to one subgroup of medical alert information and adds the requirements that are specific to that subgroup: the value set for `Flag.code`, the main group and subgroup in `Flag.category` and, for some subgroups, extensions. The patient is given with the Swedish base profile [SE Base Patient](https://hl7.se/fhir/ig/base/StructureDefinition-SEBasePatient.html). Select a profile in the diagram to open it.
 
-<!-- Medicinska uppmärksamhetssignaler används för att snabbt och tydligt uppmärksamma viktiga tillstånd, behandlingar eller risker hos en patient som kan påverka vård och omhändertagande. Nedan presenteras de olika typerna av uppmärksamhetssignaler som används inom svensk hälso- och sjukvård, tillsammans med tillhörande profiler och beskrivningar. Varje signal har en specifik betydelse och kan kopplas till särskilda vårdrutiner, smittskydd, överkänslighet eller annan viktig information som behöver beaktas i patientens vård.
+<div style="margin: 1em 0 2em 0;">
+{% include profile-overview.svg %}
+</div>
 
-De olika typerna av uppmärksamhetssignaler är definierade i Socialstyrelsens nationella specifikation för medicinsk uppmärksamhetsinformation. -->
+### Mapping per subgroup
 
+For each subgroup, the tables below give how the classes and attributes in the information specification for medical alert information (UMI) are represented in the profile. UMI classes and attributes are given with their Swedish names, as in the specification. The same mapping is shown under *Mappings* on each profile page. The *Mappings* tab also shows mappings to the HL7 RIM and to the FiveWs pattern; those are inherited automatically from the FHIR resource Flag and are not specific to this guide.
 
+The mapping is based on the work with medical alert information in openEHR. Supplementary information, for example the underlying diagnosis or procedure, can be referenced from the medical alert information with the extension `detail` (flag-detail). For each subgroup, the FHIR resource that can be used for the supplementary information is given.
+
+#### Common to all medical alert information
+
+The following applies to all subgroups and is defined in the base profile [SE AlertInformation Flag](StructureDefinition-SEAlertInformationFlag.html).
+
+<table class="grid umi">
+<thead><tr><th>UMI</th><th>FHIR</th><th>Comment</th></tr></thead>
+<tbody>
+<tr><td>Patient</td><td><code>subject</code></td><td>Reference to the patient, according to SE Base Patient.</td></tr>
+<tr><td>Typ av uppmärksamhetsinformation, huvudgrupp (main group)</td><td><code>category[mainGroup]</code></td><td>The main group of medical alert information. <code>Flag.category</code> can be given as the main group, the subgroup or both.</td></tr>
+<tr><td>Typ av uppmärksamhetsinformation, undergrupp (subgroup)</td><td><code>category[subGroup]</code></td><td>The subgroup of medical alert information.</td></tr>
+<tr><td>negation</td><td><code>status</code></td><td>Negation is handled via <code>Flag.status</code>. How the status is set is given for each subgroup. <code>entered-in-error</code> is not used.</td></tr>
+<tr><td>–</td><td><code>code.text</code></td><td>The value the user has selected in the system, for example the term in column A of the code list, can be given in <code>code.text</code>.</td></tr>
+<tr><td>–</td><td><code>extension[comment]</code></td><td>Comment on the medical alert information (note extension).</td></tr>
+<tr><td>–</td><td><code>extension[priority]</code></td><td>Priority of the medical alert information (flag-priority extension).</td></tr>
+<tr><td>–</td><td><code>extension[detail]</code></td><td>Reference to supplementary information (flag-detail extension).</td></tr>
+</tbody>
+</table>
 
 ### Medical conditions and treatments
 
-| Subgroup of medical alert information | Profile | Description |
-| -------- | ------- | ------- |
-| 1 Other medical condition | [SEAlertInformation-1-OtherMedicalConditionFlag](StructureDefinition-SEAlertInformation-1-OtherMedicalConditionFlag.html) | A medical condition, other than hypersensitivity, presence of infectious disease, presence of infectious agent, presence of implant or presence of transplant, that the patient has or does not have. This is documented using the observation class in the reference model. Medical alert information about another medical condition is considered current if there is a documented occurrence of the condition in the patient, and no later record stating that the patient no longer has the condition. The medical conditions that need to be highlighted are listed in the [value set for other medical condition](ValueSet-1.2.752.116.3.1.16.1.1.html). |
-| 2 Treatment | [SEAlertInformation-2-TreatmentFlag](StructureDefinition-SEAlertInformation-2-TreatmentFlag.html) | Interventions intended to prevent ill health or to maintain or improve the individual's state of health. This is documented using the activity class in the reference model. Medical alert information about treatment is considered current if there is a documented treatment with the status ongoing, and no later record stating that the treatment is no longer ongoing. The treatments that need to be highlighted are listed in the [value set for treatment](ValueSet-1.2.752.116.3.1.16.1.2.html) and include both drug treatments and other treatments. Drug treatments are given as a selection of ATC codes (1.2.752.116.3.1.16.1.2.2). If SNOMED CT is used, the code 416608005 *drug therapy* is given in the class treatment, while the drug used in the treatment is given in the attribute type in the class active substance, or in the attribute product-id in the class medicinal product. |
-| 3 Presence of transplant | [SEAlertInformation-3-PresenceOfTransplantFlag](StructureDefinition-SEAlertInformation-3-PresenceOfTransplantFlag.html) | That the patient has, or does not have, a transplant, i.e. surgically transferred living tissue. This is documented using the observation class in the reference model. Information about a transplant is to be highlighted if there is a documented transplantation or presence of transplant in the patient, and no later documented negation of the presence of the transplant. The transplants that need to be highlighted are listed in the [value set for presence of transplant](ValueSet-1.2.752.116.3.1.16.1.4.html). |
-| 4 Presence of implant | [SEAlertInformation-4-PresenceOfImplantFlag](StructureDefinition-SEAlertInformation-4-PresenceOfImplantFlag.html) | That the patient has, or does not have, an implant, i.e. something that has been surgically inserted into the body for diagnostic, therapeutic or experimental purposes. This is documented using the observation class in the reference model. Medical alert information about presence of implant is considered current if there is a documented presence of the implant in the patient, and no later record stating that the patient no longer has the implant. The implants that need to be highlighted are listed in the [value set for presence of implant](ValueSet-1.2.752.116.3.1.16.1.3.html). |
+#### 1 Other medical condition
 
-<!-- # Medicinskt tillstånd och behandlingar
+Profile: [SE AlertInformation 1 Other Medical Condition Flag](StructureDefinition-SEAlertInformation-1-OtherMedicalConditionFlag.html)
 
-| Uppmärksamhetssignal | Profil | Beskrivning |
-| -------- | ------- | ------- |
-| 1 Annat medicinskt tillstånd | [SEAlertInformation-1-OtherMedicalConditionFlag](StructureDefinition-SEAlertInformation-1-OtherMedicalConditionFlag.html) | Medicinskt tillstånd som inte är överkänslighet, förekomst av smittsam sjukdom, förekomst av smittämne, förekomst av implantat eller förekomst av transplantat som patienten har eller inte har. Detta dokumenteras med hjälp av klassen observation i referensmodellen. Uppmärksamhetsinformation om annat medicinskt tillstånd anses aktuell om det finns en dokumenterad förekomst av tillståndet hos patienten, och ingen senare uppgift om att patienten inte längre har detta tillstånd. De medicinska tillstånd som behöver uppmärksammas finns i urvalet [Uppmärksamhetsinformation Annat medicinskt tillstånd](ValueSet-1.2.752.116.3.1.16.1.1.html) |
-| 2 Behandling | [SEAlertInformation-2-TreatmentFlag](StructureDefinition-SEAlertInformation-2-TreatmentFlag.html) | Åtgärder som syftar till att förebygga ohälsa eller bevara eller förbättra den enskildes hälsotillstånd. Detta dokumenteras med hjälp av klassen aktivitet i referensmodellen. Uppmärksamhetsinformation om behandling anses aktuell om det finns en dokumenterad behandling med status pågående, och ingen senare uppgift om att behandlingen inte längre pågår. De behandlingar som behöver uppmärksammas finns i kodverk Uppmärksamhetsinformation - Behandling, och inkluderar både läkemedelsbehandlingar och andra behandlingar. Läkemedelsbehandlingar anges i kodverket i form av ett urval av ATC-koder (1.2.752.116.3.1.16.1.2.2). Om dokumentationen görs med Snomed CT anges kod 416608005, läkemedelsbehandling i klass behandling, medan information om vilket läkemedel som används i behandlingen anges i attribut ’typ’ i klass aktiv substans eller i attribut ’produkt-id’ i klass läkemedelsprodukt. |
-| 3 Förekomst av transplantat | [SEAlertInformation-3-PresenceOfTransplantFlag](StructureDefinition-SEAlertInformation-3-PresenceOfTransplantFlag.html) | Indikerar förekomst av transplantat hos patienten, såsom organ eller vävnad som transplanterats. Uppmärksamhetsinformation om transplantat anses aktuell om det finns en dokumenterad förekomst av transplantatet hos patienten, och ingen senare uppgift om att transplantatet inte längre är närvarande. |
-| 4 Förekomst av implantat | [SEAlertInformation-4-PresenceOfImplantFlag](StructureDefinition-SEAlertInformation-4-PresenceOfImplantFlag.html) | Indikerar förekomst av implantat hos patienten, såsom medicinska enheter eller proteser som har implanterats. Uppmärksamhetsinformation om implantat anses aktuell om det finns en dokumenterad förekomst av implantatet hos patienten, och ingen senare uppgift om att implantatet inte längre är närvarande. | -->
+<table class="grid umi">
+<thead><tr><th>UMI</th><th>FHIR</th><th>Comment</th></tr></thead>
+<tbody>
+<tr><td>Annat medicinskt tillstånd.värde</td><td><code>code</code></td><td>A code from the value set <a href="ValueSet-1.2.752.116.3.1.16.1.1.html">Alert Information – Other Medical Condition</a> (1.2.752.116.3.1.16.1.1).</td></tr>
+<tr><td>Annat medicinskt tillstånd.status [observerad förekomst], negation [sant/falskt]</td><td><code>status</code></td><td>observerad förekomst and negation = falskt → <code>active</code><br/>observerad förekomst and negation = sant → <code>inactive</code></td></tr>
+<tr><td>Annat medicinskt tillstånd.tid (TS)</td><td><code>period.start</code>, <code>period.end</code></td><td></td></tr>
+</tbody>
+</table>
+
+Supplementary information: Condition.
+
+#### 2 Treatment
+
+Profile: [SE AlertInformation 2 Treatment Flag](StructureDefinition-SEAlertInformation-2-TreatmentFlag.html)
+
+<table class="grid umi">
+<thead><tr><th>UMI</th><th>FHIR</th><th>Comment</th></tr></thead>
+<tbody>
+<tr><td>Behandling.kod</td><td><code>code</code></td><td>A code from the value set <a href="ValueSet-1.2.752.116.3.1.16.1.2.html">Alert Information – Treatment</a> (1.2.752.116.3.1.16.1.2), or the NPL-id of a medicinal product or the NSL-id of an active substance.</td></tr>
+<tr><td>Behandling.status [pågående, utförd, avbruten]</td><td><code>status</code></td><td>pågående (ongoing) → <code>active</code><br/>utförd (completed) or avbruten (cancelled) → <code>inactive</code></td></tr>
+<tr><td>Behandling.tid (IVL)</td><td><code>period.start</code>, <code>period.end</code></td><td></td></tr>
+</tbody>
+</table>
+
+Supplementary information: Procedure.
+
+#### 3 Presence of transplant
+
+Profile: [SE AlertInformation 3 Presence of Transplant Flag](StructureDefinition-SEAlertInformation-3-PresenceOfTransplantFlag.html)
+
+<table class="grid umi">
+<thead><tr><th>UMI</th><th>FHIR</th><th>Comment</th></tr></thead>
+<tbody>
+<tr><td>Förekomst av transplantat.värde</td><td><code>code</code></td><td>A code from the value set <a href="ValueSet-1.2.752.116.3.1.16.1.4.html">Alert Information – Presence of Transplant</a> (1.2.752.116.3.1.16.1.4).</td></tr>
+<tr><td>Förekomst av transplantat.status [observerad förekomst], negation [sant/falskt]</td><td><code>status</code></td><td>observerad förekomst and negation = falskt → <code>active</code><br/>observerad förekomst and negation = sant → <code>inactive</code></td></tr>
+<tr><td>Förekomst av transplantat.tid (TS)</td><td><code>period.start</code>, <code>period.end</code></td><td></td></tr>
+<tr><td>Transplantation</td><td>–</td><td>The class Transplantation and its attributes are not mapped, since what is relevant for the secondary documentation is that the presence of transplant is given. Documentation of a transplantation in the primary documentation implies presence of transplant.</td></tr>
+<tr><td>Kroppsstruktur</td><td>–</td><td>Not handled in the secondary documentation.</td></tr>
+</tbody>
+</table>
+
+Supplementary information: Condition.
+
+#### 4 Presence of implant
+
+Profile: [SE AlertInformation 4 Presence of Implant Flag](StructureDefinition-SEAlertInformation-4-PresenceOfImplantFlag.html)
+
+<table class="grid umi">
+<thead><tr><th>UMI</th><th>FHIR</th><th>Comment</th></tr></thead>
+<tbody>
+<tr><td>Förekomst av implantat.värde</td><td><code>code</code></td><td>A code from the value set <a href="ValueSet-1.2.752.116.3.1.16.1.3.html">Alert Information – Presence of Implant</a> (1.2.752.116.3.1.16.1.3). The information in the class Implantat is therefore not used.</td></tr>
+<tr><td>Förekomst av implantat.status [observerad förekomst], negation [sant/falskt]</td><td><code>status</code></td><td>observerad förekomst and negation = falskt → <code>active</code><br/>observerad förekomst and negation = sant → <code>inactive</code></td></tr>
+<tr><td>Förekomst av implantat.tid (TS)</td><td><code>period.start</code>, <code>period.end</code></td><td></td></tr>
+<tr><td>Implantation, Avlägsnande av implantat</td><td>–</td><td>The classes Implantation and Avlägsnande av implantat and their attributes are not mapped, since what is relevant for the secondary documentation is that the presence of implant is given. An implantation in the primary documentation implies presence of implant, and a removal of the implant negates the presence of implant in the secondary documentation.</td></tr>
+<tr><td>Kroppsstruktur, Implantat, tillverkare, produktnamn, modellnummer</td><td>–</td><td>Not handled in the secondary documentation.</td></tr>
+</tbody>
+</table>
+
+Supplementary information: Condition; Procedure for the implantation; Observation, for example that the history, a clinical examination or an X-ray examination shows that an implant is present.
 
 ### Infection
 
-| Subgroup of medical alert information | Profile | Description |
-| -------- | ------- | ------- |
-| 5 Presence of infectious agent | [SEAlertInformation-5-PresenceOfInfectiousAgentFlag](StructureDefinition-SEAlertInformation-5-PresenceOfInfectiousAgentFlag.html) | That the patient carries, or does not carry, an infectious agent, i.e. disease-causing organisms that cause infectious diseases, such as viruses, bacteria, fungi and certain parasites. This is documented using the observation class in the reference model. Medical alert information about a specific infectious agent is considered current if there is a documented presence of the infectious agent in the patient, and no later record stating that the patient no longer carries it. The infectious agents that need to be highlighted are listed in the [value set for presence of infectious agent](ValueSet-1.2.752.116.3.1.16.1.5.html). |
-| 6 Presence of infectious disease | [SEAlertInformation-6-PresenceOfInfectiousDiseaseFlag](StructureDefinition-SEAlertInformation-6-PresenceOfInfectiousDiseaseFlag.html) | That the patient has, or does not have, an infectious disease. This is documented using the observation class in the reference model. Medical alert information about an infectious disease is considered current if there is a documented presence of the infectious disease in the patient, and no later record stating that the patient no longer has it. The infectious diseases that need to be highlighted are listed in the [value set for presence of infectious disease](ValueSet-1.2.752.116.3.1.16.1.6.html). |
+#### 5 Presence of infectious agent
 
-<!-- # Smitta
+Profile: [SE AlertInformation 5 Presence of Infectious Agent Flag](StructureDefinition-SEAlertInformation-5-PresenceOfInfectiousAgentFlag.html)
 
-| Uppmärksamhetssignal | Profil | Beskrivning |
-| -------- | ------- | ------- |
-| 5 Förekomst av smittämne | [SEAlertInformation-5-PresenceOfInfectiousAgentFlag](StructureDefinition-SEAlertInformation-5-PresenceOfInfectiousAgentFlag.html) | Indikerar förekomst av smittämne hos patienten, såsom bakterier, virus eller andra mikroorganismer som kan orsaka infektion. Uppmärksamhetsinformation om smittämne anses aktuell om det finns en dokumenterad förekomst av smittämnet hos patienten, och ingen senare uppgift om att smittämnet inte längre är närvarande. |
-| 6 Förekomst av smittsam sjukdom | [SEAlertInformation-6-PresenceOfInfectiousDiseaseFlag](StructureDefinition-SEAlertInformation-6-PresenceOfInfectiousDiseaseFlag.html) | Indikerar förekomst av smittsam sjukdom hos patienten, såsom sjukdomar som kan överföras mellan individer. Uppmärksamhetsinformation om smittsam sjukdom anses aktuell om det finns en dokumenterad förekomst av sjukdomen hos patienten, och ingen senare uppgift om att sjukdomen inte längre är närvarande. | -->
+<table class="grid umi">
+<thead><tr><th>UMI</th><th>FHIR</th><th>Comment</th></tr></thead>
+<tbody>
+<tr><td>Förekomst av smittämne.värde</td><td><code>code</code></td><td>A code from the value set <a href="ValueSet-1.2.752.116.3.1.16.1.5.html">Alert Information – Presence of Infectious Agent</a> (1.2.752.116.3.1.16.1.5), for example MRSA. The corresponding combinations of ICD-10-SE codes are given in the concept map <a href="ConceptMap-SEAlertInformationInfectiousAgentSnomedToICD10SE.html">Presence of Infectious Agent SNOMED CT to ICD-10-SE</a>.</td></tr>
+<tr><td>Förekomst av smittämne.status [observerad förekomst], negation [sant/falskt]</td><td><code>status</code></td><td>observerad förekomst and negation = falskt → <code>active</code><br/>observerad förekomst and negation = sant → <code>inactive</code></td></tr>
+<tr><td>Förekomst av smittämne.tid (TS/IVL)</td><td><code>period.start</code>, <code>period.end</code></td><td></td></tr>
+</tbody>
+</table>
+
+Supplementary information: Condition.
+
+#### 6 Presence of infectious disease
+
+Profile: [SE AlertInformation 6 Presence of Infectious Disease Flag](StructureDefinition-SEAlertInformation-6-PresenceOfInfectiousDiseaseFlag.html)
+
+<table class="grid umi">
+<thead><tr><th>UMI</th><th>FHIR</th><th>Comment</th></tr></thead>
+<tbody>
+<tr><td>Förekomst av smittsam sjukdom.värde</td><td><code>code</code></td><td>A code from the value set <a href="ValueSet-1.2.752.116.3.1.16.1.6.html">Alert Information – Presence of Infectious Disease</a> (1.2.752.116.3.1.16.1.6), for example blodsmitta hos gravid.</td></tr>
+<tr><td>Förekomst av smittsam sjukdom.status [observerad förekomst], negation [sant/falskt]</td><td><code>status</code></td><td>observerad förekomst and negation = falskt → <code>active</code><br/>observerad förekomst and negation = sant → <code>inactive</code></td></tr>
+<tr><td>Förekomst av smittsam sjukdom.tid (TS/IVL)</td><td><code>period.start</code>, <code>period.end</code></td><td></td></tr>
+</tbody>
+</table>
+
+Supplementary information: Condition.
 
 ### Hypersensitivity
 
-| Subgroup of medical alert information | Profile | Description |
-|---|---|---|
-| 7 Hypersensitivity | [SEAlertInformation-7-HypersensitivityFlag](StructureDefinition-SEAlertInformation-7-HypersensitivityFlag.html) | A state of increased sensitivity on contact with factors in the environment that are normally tolerated by most people. That the patient has, or does not have, a hypersensitivity is documented using the observation class in the reference model. Medical alert information about hypersensitivity is considered current if there is a documented presence of the hypersensitivity in the patient, and no later record stating that the patient no longer has it. The substances that are, or are suspected to be, linked to a hypersensitivity are given in the classes chemical, active substance, excipient and medicinal product. |
+#### 7 Hypersensitivity
 
-<!-- # Överkänslighet
+Profile: [SE AlertInformation 7 Hypersensitivity Flag](StructureDefinition-SEAlertInformation-7-HypersensitivityFlag.html)
 
-| Uppmärksamhetssignal | Profil | Beskrivning |
-|---|---|---|
-| 7 Överkänslighetstillstånd | [SEAlertInformation-7-HypersensitivityFlag](StructureDefinition-SEAlertInformation-7-HypersensitivityFlag.html) |  Indikerar en överkänslighet mot en specifik kemikalie, aktiv substans, hjälpämne eller en specifik läkemedelsprodukt. Uppmärksamhetsinformation om överkänslighet anses aktuell om det finns en dokumenterad förekomst av överkänsligheten, och ingen senare uppgift om att patienten inte längre är överkänslig. | -->
+<table class="grid umi">
+<thead><tr><th>UMI</th><th>FHIR</th><th>Comment</th></tr></thead>
+<tbody>
+<tr><td>Kemikalie.typ, Aktiv substans.typ, Hjälpämne läkemedel.typ, Läkemedelsprodukt.produkt-id</td><td><code>code</code></td><td>A code from the value set <a href="ValueSet-SEAlertInformationHypersensitivityVS.html">Alert Information – Hypersensitivity</a>: chemicals (SNOMED CT), active substances (ATC or NSL), excipients (NSL) or medicinal products (NPL). The subgroup is given in <code>category[subGroup]</code>.</td></tr>
+<tr><td>Överkänslighetstillstånd.värde</td><td>–</td><td>Not handled in the profile.</td></tr>
+<tr><td>Överkänslighetstillstånd.status [observerad förekomst], negation [sant/falskt]</td><td><code>status</code></td><td>observerad förekomst and negation = falskt → <code>active</code><br/>observerad förekomst and negation = sant → <code>inactive</code></td></tr>
+<tr><td>Överkänslighetstillstånd.tid (TS)</td><td><code>period.start</code>, <code>period.end</code></td><td></td></tr>
+<tr><td>Överkänslighetstillstånd.allvarlighetsgrad [livshotande, skadlig, besvärande]</td><td><code>extension[severityLevel]</code></td><td>livshotande → life-threatening<br/>skadlig → harmful<br/>besvärande → discomforting<br/>On a two-level scale, as in <code>AllergyIntolerance.criticality</code>: life-threatening and harmful → high, discomforting → low.</td></tr>
+<tr><td>Överkänslighetstillstånd.visshetsgrad [misstänkt]</td><td><code>extension[verificationStatus]</code></td><td>misstänkt (suspected) → <code>presumed</code><br/>If the degree of certainty is not given, it is interpreted as established → <code>confirmed</code></td></tr>
+<tr><td>Verifieringsmetod</td><td>–</td><td>Not handled in the profile. How the information was verified is much less important in the secondary documentation than that it has been verified and how certain it is (degree of certainty). The primary documentation should still make it possible to document the verification method.</td></tr>
+</tbody>
+</table>
+
+Supplementary information: AllergyIntolerance.
 
 ### Special care routine
 
-| Subgroup of medical alert information | Profile | Description |
-|---|---|---|
-| 8 Information that may lead to a special care routine | [SEAlertInformation-8-InformationSpecialCareRoutineFlag](StructureDefinition-SEAlertInformation-8-InformationSpecialCareRoutineFlag.html) | For example, that there is a threat against the patient. This is documented using the observation class in the reference model. The information is considered current if it is documented, and there is no later documentation stating that it no longer applies. |
-| 9 Decision that may lead to a special care routine | [SEAlertInformation-9-DecisionSpecialCareRoutineFlag](StructureDefinition-SEAlertInformation-9-DecisionSpecialCareRoutineFlag.html) | For example, a decision made during an end-of-life care conversation (brytpunktssamtal) about palliative care at the end of life. This is documented using the decision class in the reference model. The decision is made by the patient, by healthcare professionals or jointly. Medical alert information about a decision on a special care routine is considered current if there is a documented decision on a special care routine that has not been revoked by a later documented decision. Note that decisions about cardiopulmonary resuscitation and life-sustaining treatment imply a special care routine when the attribute approval (bifall) has the value false, whereas decisions about palliative care, issuing of a prescription restriction and referral to a specific care unit imply a special care routine when approval has the value true. |
+#### 8 Information that can lead to special care routine
 
-<!-- # Vårdrutinavvikelser
+Profile: [SE AlertInformation 8 Information Special Care Routine Flag](StructureDefinition-SEAlertInformation-8-InformationSpecialCareRoutineFlag.html)
 
-| Uppmärksamhetssignal | Profil | Beskrivning |
-|---|---|---|
-| 8 Information som kan leda till särskild vårdrutin | [SEAlertInformation-8-InformationSpecialCareRoutineFlag](StructureDefinition-SEAlertInformation-8-InformationSpecialCareRoutineFlag.html) | Indikerar information som kan leda till särskilda vårdrutiner för patienten, såsom specifika åtgärder eller behandlingar baserade på patientens tillstånd eller behov. |
-| 9 Beslut som kan leda till särskild vårdrutin | [SEAlertInformation-9-DecisionSpecialCareRoutineFlag](StructureDefinition-SEAlertInformation-9-DecisionSpecialCareRoutineFlag.html) | Indikerar beslut som kan leda till särskilda vårdrutiner för patienten, såsom specifika åtgärder eller behandlingar baserade på patientens tillstånd eller behov. | -->
+<table class="grid umi">
+<thead><tr><th>UMI</th><th>FHIR</th><th>Comment</th></tr></thead>
+<tbody>
+<tr><td>Information som kan leda till särskild vårdrutin.värde</td><td><code>code</code></td><td>A code from the value set <a href="ValueSet-59881000052100.html">Information Special Care Routine Snomed CT</a> (59881000052100).</td></tr>
+<tr><td>Information som kan leda till särskild vårdrutin.status [observerad förekomst], negation [sant/falskt]</td><td><code>status</code></td><td>observerad förekomst and negation = falskt → <code>active</code><br/>observerad förekomst and negation = sant → <code>inactive</code></td></tr>
+<tr><td>Information som kan leda till särskild vårdrutin.tid (TS)</td><td><code>period.start</code>, <code>period.end</code></td><td></td></tr>
+</tbody>
+</table>
+
+Supplementary information: for example Observation or Consent.
+
+#### 9 Decision that can lead to special care routine
+
+Profile: [SE AlertInformation 9 Decision Special Care Routine Flag](StructureDefinition-SEAlertInformation-9-DecisionSpecialCareRoutineFlag.html)
+
+<table class="grid umi">
+<thead><tr><th>UMI</th><th>FHIR</th><th>Comment</th></tr></thead>
+<tbody>
+<tr><td>Beslut som kan leda till särskild vårdrutin.kod</td><td><code>code</code></td><td>A code from the value set <a href="ValueSet-103491000052103.html">Decision Special Care Routine Snomed CT</a> (103491000052103).</td></tr>
+<tr><td>Beslut som kan leda till särskild vårdrutin.beskrivning</td><td><code>extension[descriptionOfDecision]</code></td><td>Description of the decision.</td></tr>
+<tr><td>Beslut som kan leda till särskild vårdrutin.bifall [sant/falskt]</td><td><code>status</code></td><td>bifall (approval) = sant → <code>active</code><br/>bifall = falskt → <code>inactive</code></td></tr>
+<tr><td>Beslut som kan leda till särskild vårdrutin.tidpunkt (TS)</td><td><code>period.start</code>, <code>period.end</code></td><td></td></tr>
+</tbody>
+</table>
+
+Supplementary information: for example Observation or Consent.
 
 ### Uncategorized medical alert information
 
-| Subgroup of medical alert information | Profile | Description |
-|---|---|---|
-| 10 Uncategorized medical alert information | [SEAlertInformation-10-UncategorizedFlag](StructureDefinition-SEAlertInformation-10-UncategorizedFlag.html) | Uncategorized medical alert information refers here to historically recorded medical alert information that does not meet the current requirements for information structure, as well as medical alert information that is not nationally agreed. This is documented using the document class in the reference model. |
+#### 10 Uncategorized medical alert information
 
-<!-- # Ej strukturanpassad uppmärksamhetsinformation (Historiskt angiven uppmärksamhetsinformation)
+Profile: [SE AlertInformation 10 Uncategorized Flag](StructureDefinition-SEAlertInformation-10-UncategorizedFlag.html)
 
-| Uppmärksamhetssignal | Profil | Beskrivning |
-|---|---|---|
-| 10 Ej strukturanpassad uppmärksamhetsinformation | [SEAlertInformation-10-UncategorizedFlag](StructureDefinition-SEAlertInformation-10-UncategorizedFlag.html) | Ej strukturanpassad uppmärksamhetsinformation avser historiskt angiven uppmärksamhetsinformation som ej uppfyller gällande krav på informationsstruktur | -->
+<table class="grid umi">
+<thead><tr><th>UMI</th><th>FHIR</th><th>Comment</th></tr></thead>
+<tbody>
+<tr><td>Ej strukturanpassad uppmärksamhetsinformation</td><td><code>code.text</code></td><td>The information is given as text. <code>Flag.code</code> has no binding, and a code is given in <code>code.coding</code> only if one is available.</td></tr>
+<tr><td>Ej strukturanpassad uppmärksamhetsinformation.dokumentationstidpunkt</td><td><code>period.start</code></td><td></td></tr>
+</tbody>
+</table>

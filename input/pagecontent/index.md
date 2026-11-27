@@ -6,12 +6,6 @@ Swedish eHealth Agency (E-hälsomyndigheten) specification
 
 This implementation guide follows version 6.1.2 of the specification.
 
-<!---
-Denna implementationsguide publiceras av HL7 Sverige och uttrycker de profiler som används för uppmärksamhetsinformation baserad på Socialstyrelsens informationsspecifikation för
-uppmärksamhetsinformation <https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/>.
--->
-
-<!-- # Användningsbeskrivning -->
 ### Usage Description
 
 This implementation guide describes how medical alert information can be structured and exchanged using the resources of the HL7 FHIR standard. The guide is based on the eHealth Agency's (E-hälsomyndigheten) information specification for medical alert information and aims to enable uniform and secure information exchange between healthcare systems, regardless of vendor. Medical alert information includes data on patients’ special needs, risks, or other circumstances that are important to consider in healthcare and social care situations. The information is intended to raise awareness among healthcare professionals and other relevant stakeholders, with the purpose of contributing to safe, person-centered, and secure care.
@@ -26,49 +20,28 @@ The guide is designed to support common Swedish healthcare exchange scenarios, s
 
 To ensure consistent wording across the guide, Swedish terms specific to medical alert information were translated into English according to [Terminology and translations](translations.html).
 
-#### Alert label usage
+#### Code and displayed text
 
-In the national code list for medical alert information, everything that needs to be highlighted has a short name that is shown to healthcare professionals, for example *Pacemaker* or *Blodsmitta hos gravid* (column A of the code list). In this guide that name is called the alert label. The alert label is kept apart from the terminology code that identifies the condition, treatment or substance, since one alert label can correspond to codes in several code systems.
-
-Use `Flag.code` for the clinical terminology code (SNOMED CT, ICD-10-SE, or ATC).  
-Use `Flag.extension[alertLabel]` for the user-facing alert label that corresponds to the national code list published by the eHealth Agency: [Uppmärksamhetsinformation - E-hälsomyndigheten](https://www.ehalsomyndigheten.se/verksamhet/ndi/interoperabilitet/uppmarksamhetsinformation/).
+`Flag.code` holds the terminology code for the condition, treatment or substance (SNOMED CT, ICD-10-SE, ATC, NSL or NPL), from the value set of the profile for the subgroup. The value the user has selected in the system, for example the term in column A of the national code list for medical alert information (such as *Pacemaker* or *Blodsmitta hos gravid*), can be given in `Flag.code.text`.
 
 For clients:
 
-- Display `extension[alertLabel].valueCodeableConcept` as the alert heading/title.
-- Display `code.coding` as the underlying terminology code for interoperability and decision support.
-- If `alertLabel` is missing, fall back to `code.text` and/or `code.coding.display`.
+- Display `code.text` as the heading of the medical alert information, if it is given.
+- Otherwise display `code.coding.display`.
+- Use `code.coding` for interoperability and decision support.
 
-<!-- Denna implementationsguide beskriver hur uppmärksamhetsinformation kan struktureras och utbytas med hjälp av HL7 FHIR-standardens resurser. Guiden är baserad på Socialstyrelsens informationsspecifikation för uppmärksamhetsinformation och syftar till att möjliggöra ett enhetligt och säkert informationsutbyte mellan vårdsystem, oberoende av leverantör.
-Uppmärksamhetsinformation innefattar uppgifter om patienters särskilda behov, risker eller andra förhållanden som är viktiga att beakta i vård- och omsorgssituationer. Informationen är avsedd att höja medvetenheten hos vårdpersonal och andra berörda aktörer, i syfte att bidra till en trygg, personcentrerad och säker vård.
-Implementationsguiden definierar specialiserade FHIR-profiler, värdemängder (ValueSets), koder och exempel som överensstämmer med Socialstyrelsens nationella riktlinjer och begreppsmodeller. Den är avsedd att stödja tekniska integrationer och interoperabilitet mellan informationssystem inom vård och omsorg.
-Målgruppen för guiden är informationsförvaltare, systemförvaltare, utvecklare och andra som arbetar med införande av FHIR-baserat informationsutbyte inom hälso- och sjukvård samt socialtjänst.
+#### Profiles
 
-
-Den här implementationsguiden beskriver utbyte av uppmärksamhetsinformation med FHIR
-
-Här kan vi beskriva hur profilen SEAlerInformationFlag ska användas i kombination med övriga profiler som refereras till. Det vi behöver beskriva är bl.a.
- - Tändning och släckning
- - Hantering av Ej strukturanpassad uppmärksamhetsinformation
- - ...
-
-Jag har än så länge bara skapat profiler för de observationer som hanterar smitta. Informationen i Socialstyrelsens informationsmodell går att hantera på olika sätt i FHIR. Exempelvis kan information om smitta hanteras med resursen Condition men kan också beskrivas som en Observation. Jag är inne på att initialt testa om användningen av resurserna Observation, Procedure och AllergyIntolerance kan täcka de behov vi har. -->
+All profiles are derived from the base profile [SE AlertInformation Flag](StructureDefinition-SEAlertInformationFlag.html). See [Mapping from UMI](flags.html) for an overview of the profiles and the mapping from the information specification for medical alert information (UMI) to the profiles.
 
 ### The working group
+
 The development of this implementation guide is carried out by a work group under the management of HL7 Sweden <http://hl7.se>. The group is composed of representatives from regions, state authorities, system vendors and other experts within the FHIR standard, informatics, architecture and terminology.
 
-<!---
-Framtagandet av dessa basprofiler och utökningar genomförs av en arbetsgrupp under HL7 Sverige <http://hl7.se>. Gruppen består av representanter från regioner, myndigheter, systemleverantörer samt andra experter inom FHIR, informatik, arkitektur, terminologi etc.
--->
-
 ### Contact information
-To reach the working group for the medical alert information implementation guide contact  
-[Claudia Ehrentraut](mailto:claudia.ehrentraut@regionstockholm.se) - Project manager for the alert information working group.
 
-<!---
-För att komma i kontakt med gruppen som arbetar med uppmärksamhetsinformation:
-[Claudia Ehrentraut](mailto:claudia.ehrentraut@regionstockholm.se) - Projektledare för arbetsgruppen för uppmärksamhetsinformation.
--->
+To reach the working group for the medical alert information implementation guide contact  
+[Claudia Ehrentraut](mailto:claudia.ehrentraut@regionstockholm.se) - Project manager for the medical alert information working group.
 
 ### IP Statements
 
